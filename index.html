@@ -1,0 +1,2269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plateforme de Signalement du Validisme</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Toolbar d'accessibilité Faites Mieux -->
+    <link rel="stylesheet" href="https://alixb-accessible.github.io/faites-mieux-toolbar/faites-mieux.css">
+    <script src="https://alixb-accessible.github.io/faites-mieux-toolbar/faites-mieux.js" defer></script>
+    
+    <!-- jsPDF pour l'export PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- CSS personnalisé -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container mx-auto px-4 py-8 max-w-6xl">
+    <!-- Header avec navigation -->
+    <header class="text-center mb-12 bg-gray-800 border-2 border-yellow-400 rounded-xl shadow-lg p-8" role="banner">
+        <h1 class="text-4xl md:text-5xl font-bold text-yellow-300 mb-4">
+            Plateforme de Signalement du Validisme
+        </h1>
+        <p class="text-xl text-gray-300 mb-6">
+            Témoigner, s'informer, agir contre les discriminations et violences validistes
+        </p>
+
+        <!-- Navigation principale -->
+        <nav class="flex flex-wrap justify-center gap-4 mb-6" role="navigation" aria-label="Navigation principale">
+            <button 
+                onclick="showSection('apropos')" 
+                class="nav-btn bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all focus:outline-none focus:ring-4 focus:ring-blue-300"
+                aria-label="Aller à la section À propos"
+                tabindex="0">
+                A propos
+            </button>
+            <button 
+                onclick="showSection('temoignage')" 
+                class="nav-btn bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all focus:outline-none focus:ring-4 focus:ring-green-300"
+                aria-label="Aller à la section Témoigner"
+                tabindex="0">
+                Témoigner
+            </button>
+            <button 
+                onclick="showSection('carnet')" 
+                class="nav-btn bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-semibold transition-all focus:outline-none focus:ring-4 focus:ring-teal-300"
+                aria-label="Aller à Mon Carnet de Preuves"
+                tabindex="0">
+                Mon Carnet de Preuves
+            </button>
+            <button 
+                onclick="showSection('violentometre')" 
+                class="nav-btn bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all focus:outline-none focus:ring-4 focus:ring-purple-300"
+                aria-label="Aller à la section Violentomètre"
+                tabindex="0">
+                Violentometre
+            </button>
+            <button 
+                onclick="showSection('legal')" 
+                class="nav-btn bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-all focus:outline-none focus:ring-4 focus:ring-red-300"
+                aria-label="Aller à la section Cadre légal"
+                tabindex="0">
+                Cadre legal
+            </button>
+            <button 
+                onclick="showSection('aide')" 
+                class="nav-btn bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-lg font-semibold transition-all focus:outline-none focus:ring-4 focus:ring-yellow-300"
+                aria-label="Aller à la section Aide"
+                tabindex="0">
+                Aide
+            </button>
+        </nav>
+    </header>
+<!-- Section À propos -->
+    <section id="apropos" class="section bg-gray-800 border-2 border-blue-400 rounded-xl shadow-lg p-8 mb-8" role="main" aria-labelledby="apropos-title">
+        <div class="text-center mb-6">
+            <button 
+                onclick="toggleSectionFALC('apropos')" 
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-bold text-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
+                aria-label="Basculer vers la version Facile à Lire et à Comprendre"
+                tabindex="0">
+                Version Facile a Lire et a Comprendre FALC
+            </button>
+        </div>
+
+        <h2 id="apropos-title" class="text-3xl font-bold text-blue-300 mb-6">A propos de cette plateforme</h2>
+
+        <!-- Version normale -->
+        <div id="apropos-normal" class="space-y-6">
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
+                <h3 class="font-bold text-blue-800 mb-4">Notre mission</h3>
+                <p class="text-blue-700">
+                    Cette plateforme permet de <strong>témoigner anonymement</strong> des discriminations et violences validistes vécues en France. 
+                    Vos témoignages contribuent à une base de données de recherche pour mieux comprendre et combattre le validisme.
+                </p>
+            </div>
+
+            <div class="bg-green-50 border-l-4 border-green-400 p-6 rounded-lg">
+                <h3 class="font-bold text-green-800 mb-4">Confidentialité et sécurité</h3>
+                <ul class="text-green-700 space-y-2">
+                    <li><strong>Anonymat garanti</strong> : aucune donnée personnelle n'est obligatoire</li>
+                    <li><strong>Données sécurisées</strong> : hébergement respectueux de la vie privée</li>
+                    <li><strong>Usage éthique</strong> : données utilisées uniquement pour la recherche et la sensibilisation</li>
+                    <li><strong>Pas de tracking</strong> : aucun cookie publicitaire ou de suivi</li>
+                </ul>
+            </div>
+
+            <div class="bg-purple-50 border-l-4 border-purple-400 p-6 rounded-lg">
+                <h3 class="font-bold text-purple-800 mb-4">Utilisation des données</h3>
+                <p class="text-purple-700 mb-3">Vos témoignages anonymes servent à :</p>
+                <ul class="text-purple-700 space-y-1">
+                    <li>Documenter la réalité du validisme en France</li>
+                    <li>Sensibiliser le public et les institutions</li>
+                    <li>Orienter les politiques publiques</li>
+                    <li>Soutenir la recherche académique</li>
+                    <li>Améliorer l'accompagnement des victimes</li>
+                </ul>
+            </div>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
+                <h3 class="font-bold text-yellow-800 mb-4">Important</h3>
+                <p class="text-yellow-700">
+                    Cette plateforme est un outil de <strong>témoignage et d'orientation</strong>. 
+                    En cas de danger immédiat, contactez le <strong>17 (Police)</strong>, le <strong>15 (SAMU)</strong> ou le <strong>114 (SMS pour sourds/malentendants)</strong>.
+                </p>
+            </div>
+
+            <div class="bg-gray-50 border-l-4 border-gray-400 p-6 rounded-lg">
+                <h3 class="font-bold text-gray-800 mb-4">Qui sommes-nous ?</h3>
+                <p class="text-gray-700">
+                    Cette initiative est portée par des militants et chercheurs engagés contre le validisme. 
+                    Nous travaillons en collaboration avec des associations de personnes handicapées et des institutions de recherche.
+                </p>
+            </div>
+        </div>
+<!-- Version FALC -->
+        <div id="apropos-falc" class="hidden space-y-8">
+            <div class="bg-blue-50 border-l-8 border-blue-500 p-8 rounded-lg">
+                <h3 class="font-bold text-blue-800 text-2xl mb-6">Pourquoi ce site existe ?</h3>
+                <div class="text-blue-700 text-lg space-y-4">
+                    <p><strong>Ce site sert à raconter ce qui vous arrive de mal à cause de votre handicap.</strong></p>
+                    <p>Quand vous racontez votre histoire, cela aide à :</p>
+                    <ul class="ml-6 space-y-2">
+                        <li>Comprendre les problèmes des personnes handicapées</li>
+                        <li>Aider d'autres personnes handicapées</li>
+                        <li>Changer les lois pour mieux protéger</li>
+                    </ul>
+                    <p><strong>Votre histoire est importante.</strong></p>
+                </div>
+            </div>
+
+            <div class="bg-green-50 border-l-8 border-green-500 p-8 rounded-lg">
+                <h3 class="font-bold text-green-800 text-2xl mb-6">Vos informations sont protégées</h3>
+                <div class="text-green-700 text-lg space-y-4">
+                    <p><strong>Vous n'êtes pas obligé de donner votre nom.</strong></p>
+                    <p>Ce que vous nous dites reste secret :</p>
+                    <ul class="ml-6 space-y-2">
+                        <li>Personne ne saura que c'est vous</li>
+                        <li>Vos informations sont bien gardées</li>
+                        <li>On ne vend pas vos informations</li>
+                        <li>On ne vous suit pas sur internet</li>
+                    </ul>
+                    <p><strong>Vous pouvez nous faire confiance.</strong></p>
+                </div>
+            </div>
+
+            <div class="bg-purple-50 border-l-8 border-purple-500 p-8 rounded-lg">
+                <h3 class="font-bold text-purple-800 text-2xl mb-6">À quoi servent vos histoires ?</h3>
+                <div class="text-purple-700 text-lg space-y-4">
+                    <p><strong>Vos histoires nous aident à :</strong></p>
+                    <ul class="ml-6 space-y-3">
+                        <li><strong>Montrer les problèmes</strong> que vivent les personnes handicapées</li>
+                        <li><strong>Expliquer aux gens</strong> ce qu'est le validisme</li>
+                        <li><strong>Demander de meilleures lois</strong> pour protéger</li>
+                        <li><strong>Aider les chercheurs</strong> à étudier ces problèmes</li>
+                        <li><strong>Mieux aider</strong> les personnes qui ont des problèmes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-red-50 border-l-8 border-red-500 p-8 rounded-lg">
+                <h3 class="font-bold text-red-800 text-2xl mb-6">Si c'est urgent</h3>
+                <div class="text-red-700 text-lg space-y-4">
+                    <p><strong>Si quelqu'un vous fait du mal maintenant :</strong></p>
+                    <ul class="ml-6 space-y-3">
+                        <li><strong>Appelez le 17</strong> pour la police</li>
+                        <li><strong>Appelez le 15</strong> si vous êtes blessé</li>
+                        <li><strong>Envoyez un SMS au 114</strong> si vous êtes sourd ou malentendant</li>
+                    </ul>
+                    <p><strong>Ce site n'est pas pour les urgences.</strong></p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 border-l-8 border-gray-500 p-8 rounded-lg">
+                <h3 class="font-bold text-gray-800 text-2xl mb-6">Qui a fait ce site ?</h3>
+                <div class="text-gray-700 text-lg space-y-4">
+                    <p><strong>Des personnes qui se battent contre le validisme.</strong></p>
+                    <p>Nous travaillons avec :</p>
+                    <ul class="ml-6 space-y-2">
+                        <li>Des associations de personnes handicapées</li>
+                        <li>Des chercheurs</li>
+                        <li>Des gens qui veulent aider</li>
+                    </ul>
+                    <p><strong>Nous voulons que les personnes handicapées soient respectées.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Section Témoignage -->
+    <section id="temoignage" class="section bg-gray-800 border-2 border-green-400 rounded-xl shadow-lg p-8 mb-8 hidden" role="main" aria-labelledby="temoignage-title">
+        <div class="text-center mb-6">
+            <button 
+                onclick="toggleSectionFALC('temoignage')" 
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-bold text-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
+                tabindex="0">
+                Version Facile a Lire et a Comprendre FALC
+            </button>
+        </div>
+
+        <h2 id="temoignage-title" class="text-3xl font-bold text-green-300 mb-6">Témoigner</h2>
+
+        <!-- Version normale -->
+        <div id="temoignage-normal">
+            <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+                <h3 class="font-bold text-green-800 mb-3">Votre témoignage compte</h3>
+                <p class="text-green-700">
+                    Partagez votre expérience pour contribuer à une meilleure compréhension du validisme en France. 
+                    Toutes les informations sont <strong>anonymes et confidentielles</strong>.
+                </p>
+            </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg mb-6">
+                <h3 class="font-bold text-blue-800 mb-3">Choix d'envoi</h3>
+                <p class="text-blue-700 mb-3">Vous avez deux options :</p>
+                <ul class="text-blue-700 space-y-2">
+                    <li><strong>Option 1 :</strong> Envoyer uniquement les statistiques (anonyme, pas de témoignage détaillé)</li>
+                    <li><strong>Option 2 :</strong> Envoyer le témoignage complet avec photos et détails</li>
+                </ul>
+                <p class="text-blue-700 mt-3">
+                    Dans les deux cas, un PDF sera généré pour vous. Vous pourrez le télécharger et/ou l'envoyer par email.
+                </p>
+            </div>
+
+            <form id="signalementForm" class="space-y-8">
+                <!-- Type d'action -->
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-4">Type de contribution</h3>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-white cursor-pointer">
+                            <input type="radio" name="action" value="temoignage" class="w-5 h-5" required>
+                            <span>Témoignage personnel (j'ai vécu du validisme)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-white cursor-pointer">
+                            <input type="radio" name="action" value="temoignage_tiers" class="w-5 h-5">
+                            <span>Témoignage pour autrui (j'ai été témoin de validisme)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-white cursor-pointer">
+                            <input type="radio" name="action" value="signalement" class="w-5 h-5">
+                            <span>Signalement de contenu validiste (média, publication, etc.)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Informations démographiques -->
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-4">Informations générales (optionnelles)</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-white mb-2">Tranche d'âge</label>
+                            <select name="age" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                                <option value="">Non renseigné</option>
+                                <option value="moins-18">Moins de 18 ans</option>
+                                <option value="18-25">18-25 ans</option>
+                                <option value="26-35">26-35 ans</option>
+                                <option value="36-50">36-50 ans</option>
+                                <option value="51-65">51-65 ans</option>
+                                <option value="plus-65">Plus de 65 ans</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-white mb-2">Département</label>
+                            <input type="text" name="departement" placeholder="Ex: 75, 13, 69..." class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                        </div>
+                        <div>
+                            <label class="block text-white mb-2">Type de handicap</label>
+                            <select name="handicap" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                                <option value="">Non renseigné</option>
+                                <option value="moteur">Handicap moteur</option>
+                                <option value="sensoriel">Handicap sensoriel (visuel, auditif)</option>
+                                <option value="intellectuel">Handicap intellectuel</option>
+                                <option value="psychique">Handicap psychique</option>
+                                <option value="cognitif">Troubles cognitifs (DYS, TDAH, etc.)</option>
+                                <option value="autisme">Autisme/TSA</option>
+                                <option value="maladie-chronique">Maladie chronique/invisible</option>
+                                <option value="multiple">Handicaps multiples</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-white mb-2">Type de lieu de vie</label>
+                            <select name="lieu" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                                <option value="">Non renseigné</option>
+                                <option value="domicile">À domicile (seul/famille)</option>
+                                <option value="logement-accompagne">Logement accompagné</option>
+                                <option value="institution">Institution (IME, MAS, FAM, etc.)</option>
+                                <option value="foyer">Foyer de vie/d'hébergement</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contexte -->
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-4">Contexte de la situation</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold text-gray-100 mb-3">Lieu/contexte (plusieurs choix possibles)</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="famille" class="w-5 h-5">
+                                    <span>Famille</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="ecole" class="w-5 h-5">
+                                    <span>École/Université</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="travail" class="w-5 h-5">
+                                    <span>Travail/Emploi</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="medical" class="w-5 h-5">
+                                    <span>Médical/Santé</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="transport" class="w-5 h-5">
+                                    <span>Transports</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="commerce" class="w-5 h-5">
+                                    <span>Commerce/Services</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="administration" class="w-5 h-5">
+                                    <span>Administration</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="institution" class="w-5 h-5">
+                                    <span>Institution spécialisée</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="rue" class="w-5 h-5">
+                                    <span>Espace public</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="internet" class="w-5 h-5">
+                                    <span>Internet/Réseaux sociaux</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-gray-100 mb-3">Type de violence (max 3 choix)</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="violence" value="discrimination" class="w-5 h-5">
+                                    <span>Discrimination</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="violence" value="harcelement" class="w-5 h-5">
+                                    <span>Harcèlement</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_physiques" class="w-5 h-5">
+                                    <span>Violences physiques</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_psychologiques" class="w-5 h-5">
+                                    <span>Violences psychologiques</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_sexuelles" class="w-5 h-5">
+                                    <span>Violences sexuelles</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="violence" value="negligence" class="w-5 h-5">
+                                    <span>Négligence</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_economiques" class="w-5 h-5">
+                                    <span>Violences économiques</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_institutionnelles" class="w-5 h-5">
+                                    <span>Violences institutionnelles</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_medicales" class="w-5 h-5">
+                                    <span>Violences médicales</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-white cursor-pointer">
+                                    <input type="checkbox" name="violence" value="autre" class="w-5 h-5">
+                                    <span>Autre</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fréquence et impact -->
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-4">Fréquence et impact</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-white mb-2">Fréquence</label>
+                            <select name="frequence" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                                <option value="">Non renseigné</option>
+                                <option value="ponctuel">Événement ponctuel</option>
+                                <option value="occasionnel">Occasionnel</option>
+                                <option value="regulier">Régulier</option>
+                                <option value="quotidien">Quotidien</option>
+                                <option value="systematique">Systématique</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-white mb-2">Impact sur votre vie</label>
+                            <select name="impact" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                                <option value="">Non renseigné</option>
+                                <option value="faible">Impact faible</option>
+                                <option value="modere">Impact modéré</option>
+                                <option value="important">Impact important</option>
+                                <option value="majeur">Impact majeur</option>
+                                <option value="traumatisant">Traumatisant</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description du témoignage -->
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-4">Votre témoignage</h3>
+                    <textarea 
+                        name="description" 
+                        placeholder="Décrivez votre situation, ce qui s'est passé, comment vous vous êtes senti(e), les conséquences... Prenez le temps qu'il vous faut."
+                        class="w-full h-40 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical"
+                        required></textarea>
+                    <p class="text-gray-300 text-sm mt-2">
+                        Vous pouvez écrire comme vous le souhaitez : en français, en langue des signes française (LSF) transcrite, dans votre langue maternelle...
+                    </p>
+                </div>
+
+                <!-- Upload de fichiers -->
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-4">Fichiers joints (optionnel)</h3>
+                    <div 
+                        id="dropZone" 
+                        class="border-2 border-dashed border-gray-500 rounded-lg p-8 text-center cursor-pointer hover:border-green-400 transition-colors"
+                        tabindex="0"
+                        role="button"
+                        aria-label="Zone de dépôt de fichiers">
+                        <div class="text-gray-300 mb-4">
+                            <svg class="mx-auto h-12 w-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 48 48">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" />
+                            </svg>
+                            <p class="text-lg">Cliquez ou glissez vos fichiers ici</p>
+                            <p class="text-sm text-gray-400">Images, documents, captures d'écran... (Max 5MB par fichier, 10 fichiers max)</p>
+                        </div>
+                    </div>
+                    <input type="file" id="fileInput" multiple accept="image/*,.pdf,.doc,.docx,.txt" class="hidden">
+                    <div id="imagePreview" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4"></div>
+                </div>
+
+                <!-- Contact -->
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-4">Contact (optionnel)</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-white mb-2">Nom/Pseudonyme</label>
+                            <input type="text" name="nom" placeholder="Optionnel - pour un éventuel suivi" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                        </div>
+                        <div>
+                            <label class="block text-white mb-2">Email</label>
+                            <input type="email" name="email" placeholder="Optionnel - pour un éventuel suivi" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mode d'envoi -->
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-4">Que souhaitez-vous envoyer ?</h3>
+                    <div class="space-y-3">
+                        <label class="flex items-center space-x-3 text-white cursor-pointer">
+                            <input type="radio" name="typeEnvoi" value="stats" class="w-5 h-5" required>
+                            <span>Uniquement les statistiques (anonyme)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 text-white cursor-pointer">
+                            <input type="radio" name="typeEnvoi" value="complet" class="w-5 h-5">
+                            <span>Témoignage complet avec photos et détails</span>
+                        </label>
+                    </div>
+                    <p class="text-gray-300 text-sm mt-3">
+                        Les témoignages sont envoyés à : <strong>validisme_signalement@proton.me</strong>
+                    </p>
+                </div>
+
+                <!-- Boutons de soumission -->
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <button 
+                        type="button" 
+                        onclick="generatePDF('signalementForm')" 
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors focus:outline-none focus:ring-4 focus:ring-blue-300"
+                        tabindex="0">
+                        Télécharger en PDF
+                    </button>
+                    <button 
+                        type="submit" 
+                        class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors focus:outline-none focus:ring-4 focus:ring-green-300"
+                        tabindex="0">
+                        Générer PDF et envoyer par email
+                    </button>
+                </div>
+            </form>
+        </div>
+<!-- Version FALC -->
+        <div id="temoignage-falc" class="hidden">
+            <div class="bg-green-50 border-l-8 border-green-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-green-800 text-2xl mb-6">Racontez votre histoire</h3>
+                <div class="text-green-700 text-lg space-y-4">
+                    <p><strong>Vous pouvez nous raconter ce qui vous est arrivé de mal à cause de votre handicap.</strong></p>
+                    <p>Votre histoire nous aide à comprendre les problèmes.</p>
+                    <p><strong>Vous n'êtes pas obligé de donner votre nom.</strong></p>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border-l-8 border-blue-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-blue-800 text-2xl mb-6">Vous avez le choix</h3>
+                <div class="text-blue-700 text-lg space-y-4">
+                    <p><strong>Choix 1 :</strong> Envoyer seulement les informations (sans raconter en détail)</p>
+                    <p><strong>Choix 2 :</strong> Envoyer toute votre histoire avec les photos</p>
+                    <p>Dans les 2 cas, vous aurez un document PDF à garder pour vous.</p>
+                </div>
+            </div>
+
+            <form id="signalementFormFALC" class="space-y-8">
+                <!-- Type d'action FALC -->
+                <div class="bg-gray-700 p-8 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-6">Qu'est-ce que vous voulez faire ?</h3>
+                    <div class="space-y-4">
+                        <label class="flex items-start space-x-3 text-white cursor-pointer">
+                            <input type="radio" name="action" value="temoignage" class="mt-1 w-5 h-5" required>
+                            <div>
+                                <span class="font-semibold">Raconter mon histoire</span>
+                                <p class="text-sm text-gray-300 mt-1">Quelque chose de mal m'est arrivé à cause de mon handicap</p>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-3 text-white cursor-pointer">
+                            <input type="radio" name="action" value="temoignage_tiers" class="mt-1 w-5 h-5">
+                            <div>
+                                <span class="font-semibold">Raconter l'histoire de quelqu'un d'autre</span>
+                                <p class="text-sm text-gray-300 mt-1">J'ai vu quelqu'un faire du mal à une personne handicapée</p>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-3 text-white cursor-pointer">
+                            <input type="radio" name="action" value="signalement" class="mt-1 w-5 h-5">
+                            <div>
+                                <span class="font-semibold">Signaler quelque chose de méchant</span>
+                                <p class="text-sm text-gray-300 mt-1">À la télé, sur internet, dans un journal...</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Informations sur vous FALC -->
+                <div class="bg-gray-700 p-8 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-6">Informations sur vous (pas obligatoire)</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Votre âge</label>
+                            <select name="age" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                                <option value="">Je ne veux pas le dire</option>
+                                <option value="moins-18">Moins de 18 ans</option>
+                                <option value="18-25">18 à 25 ans</option>
+                                <option value="26-35">26 à 35 ans</option>
+                                <option value="36-50">36 à 50 ans</option>
+                                <option value="51-65">51 à 65 ans</option>
+                                <option value="plus-65">Plus de 65 ans</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Votre département</label>
+                            <input type="text" name="departement" placeholder="Exemple: 75, 13, 69..." class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                        </div>
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Votre handicap</label>
+                            <select name="handicap" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                                <option value="">Je ne veux pas le dire</option>
+                                <option value="moteur">J'ai du mal à bouger</option>
+                                <option value="sensoriel">Je vois mal ou j'entends mal</option>
+                                <option value="intellectuel">J'ai des difficultés pour comprendre</option>
+                                <option value="psychique">J'ai des problèmes psychiques</option>
+                                <option value="cognitif">J'ai des troubles DYS ou TDAH</option>
+                                <option value="autisme">Je suis autiste</option>
+                                <option value="maladie-chronique">J'ai une maladie qu'on ne voit pas</option>
+                                <option value="multiple">J'ai plusieurs handicaps</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Où vous habitez</label>
+                            <select name="lieu" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                                <option value="">Je ne veux pas le dire</option>
+                                <option value="domicile">Chez moi ou chez ma famille</option>
+                                <option value="logement-accompagne">Dans un logement avec de l'aide</option>
+                                <option value="institution">Dans un établissement spécialisé</option>
+                                <option value="foyer">Dans un foyer</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contexte FALC -->
+                <div class="bg-gray-700 p-8 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-6">Où et comment ça s'est passé</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="font-bold text-gray-100 text-lg mb-4">Où ça s'est passé ?</h4>
+                            <div class="grid grid-cols-1 gap-4">
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="famille" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Dans ma famille</span>
+                                        <p class="text-sm text-gray-300 mt-1">Avec mes parents, frères, sœurs, grands-parents...</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="ecole" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">À l'école</span>
+                                        <p class="text-sm text-gray-300 mt-1">École, collège, lycée, université</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="travail" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Au travail</span>
+                                        <p class="text-sm text-gray-300 mt-1">Avec mon patron, mes collègues</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="medical" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Chez le docteur</span>
+                                        <p class="text-sm text-gray-300 mt-1">Médecin, hôpital, dentiste, pharmacie...</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="transport" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Dans les transports</span>
+                                        <p class="text-sm text-gray-300 mt-1">Bus, métro, train, taxi, avion...</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="commerce" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Dans un magasin</span>
+                                        <p class="text-sm text-gray-300 mt-1">Supermarché, restaurant, banque, coiffeur...</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="administration" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Dans l'administration</span>
+                                        <p class="text-sm text-gray-300 mt-1">Mairie, préfecture, CAF, Pôle emploi, MDPH...</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="institution" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Dans une institution</span>
+                                        <p class="text-sm text-gray-300 mt-1">IME, ESAT, foyer, maison de retraite...</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="rue" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Dans la rue</span>
+                                        <p class="text-sm text-gray-300 mt-1">Dehors, dans la rue, au parc</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="contexte" value="internet" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Sur internet</span>
+                                        <p class="text-sm text-gray-300 mt-1">Facebook, Twitter, YouTube, forums...</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-gray-100 text-lg mb-4">Qu'est-ce qui vous est arrivé ? (maximum 3 choix)</h4>
+                            <div class="grid grid-cols-1 gap-4">
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="violence" value="discrimination" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Discrimination</span>
+                                        <p class="text-sm text-gray-300 mt-1">On me traite différemment à cause de mon handicap</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="violence" value="harcelement" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Harcèlement</span>
+                                        <p class="text-sm text-gray-300 mt-1">On m'embête souvent, on se moque de moi</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_physiques" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Violences physiques</span>
+                                        <p class="text-sm text-gray-300 mt-1">On me frappe, on me pousse, on me fait mal</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_psychologiques" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Violences psychologiques</span>
+                                        <p class="text-sm text-gray-300 mt-1">On me dit des méchancetés, on me fait peur</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_sexuelles" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Violences sexuelles</span>
+                                        <p class="text-sm text-gray-300 mt-1">On me touche sans que je veuille, on me force</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="violence" value="negligence" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Négligence</span>
+                                        <p class="text-sm text-gray-300 mt-1">On ne s'occupe pas bien de moi, on m'oublie</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_economiques" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Violences économiques</span>
+                                        <p class="text-sm text-gray-300 mt-1">On prend mon argent, on contrôle mes sous</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_institutionnelles" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Violences institutionnelles</span>
+                                        <p class="text-sm text-gray-300 mt-1">Dans les établissements, on ne respecte pas mes droits</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="violence" value="violences_medicales" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Violences médicales</span>
+                                        <p class="text-sm text-gray-300 mt-1">Le docteur me force, ne m'explique pas, me fait mal</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 text-gray-100 cursor-pointer">
+                                    <input type="checkbox" name="violence" value="autre" class="mt-1 w-5 h-5">
+                                    <div>
+                                        <span class="font-semibold">Autre</span>
+                                        <p class="text-sm text-gray-300 mt-1">Autre chose que je vais expliquer</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fréquence et impact FALC -->
+                <div class="bg-gray-700 p-8 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-6">Combien de fois et comment ça vous a affecté</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Combien de fois ça arrive ?</label>
+                            <select name="frequence" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                                <option value="">Je ne sais pas</option>
+                                <option value="ponctuel">Une seule fois</option>
+                                <option value="occasionnel">De temps en temps</option>
+                                <option value="regulier">Souvent</option>
+                                <option value="quotidien">Tous les jours</option>
+                                <option value="systematique">Tout le temps</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Comment ça vous a affecté ?</label>
+                            <select name="impact" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                                <option value="">Je ne sais pas</option>
+                                <option value="faible">Ça va, pas trop grave</option>
+                                <option value="modere">C'est embêtant</option>
+                                <option value="important">C'est dur à vivre</option>
+                                <option value="majeur">Ça change ma vie</option>
+                                <option value="traumatisant">C'est très grave, ça me fait très mal</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description FALC -->
+                <div class="bg-gray-700 p-8 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-6">Racontez votre histoire</h3>
+                    <textarea 
+                        name="description" 
+                        placeholder="Racontez ce qui s'est passé. Écrivez comme vous voulez. Prenez votre temps."
+                        class="w-full h-48 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical text-lg"
+                        required></textarea>
+                    <div class="bg-blue-50 border border-blue-200 rounded p-4 mt-4">
+                        <p class="text-blue-800 text-sm">
+                            Vous pouvez écrire comme vous voulez : en français simple, en langue des signes, dans votre langue... L'important c'est de raconter votre histoire.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Upload fichiers FALC -->
+                <div class="bg-gray-700 p-8 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-6">Ajouter des photos ou documents (pas obligatoire)</h3>
+                    <div 
+                        id="dropZoneFALC" 
+                        class="border-2 border-dashed border-gray-500 rounded-lg p-8 text-center cursor-pointer hover:border-green-400 transition-colors"
+                        tabindex="0"
+                        role="button"
+                        aria-label="Zone de dépôt de fichiers">
+                        <div class="text-gray-300 mb-4">
+                            <svg class="mx-auto h-12 w-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 48 48">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" />
+                            </svg>
+                            <p class="text-lg">Cliquez ici pour ajouter des fichiers</p>
+                            <p class="text-sm text-gray-400">Photos, documents... (Maximum 5MB par fichier, 10 fichiers maximum)</p>
+                        </div>
+                    </div>
+                    <input type="file" id="fileInputFALC" multiple accept="image/*,.pdf,.doc,.docx,.txt" class="hidden">
+                    <div id="imagePreviewFALC" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4"></div>
+                </div>
+
+                <!-- Contact FALC -->
+                <div class="bg-gray-700 p-8 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-6">Vos informations (pas obligatoire)</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Votre nom ou un faux nom</label>
+                            <input type="text" name="nom" placeholder="Pas obligatoire" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                        </div>
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Votre email</label>
+                            <input type="email" name="email" placeholder="Pas obligatoire" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                        </div>
+                    </div>
+                    <div class="bg-yellow-50 border border-yellow-200 rounded p-4 mt-4">
+                        <p class="text-yellow-800 text-sm">
+                            Si vous donnez votre email, on pourra vous recontacter si on a des questions. Mais c'est pas obligatoire.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Mode envoi FALC -->
+                <div class="bg-gray-700 p-8 rounded-lg">
+                    <h3 class="font-bold text-white text-xl mb-6">Qu'est-ce que vous voulez envoyer ?</h3>
+                    <div class="space-y-4">
+                        <label class="flex items-start space-x-3 text-white cursor-pointer">
+                            <input type="radio" name="typeEnvoi" value="stats" class="mt-1 w-5 h-5" required>
+                            <div>
+                                <span class="font-semibold">Seulement les informations</span>
+                                <p class="text-sm text-gray-300 mt-1">Sans raconter toute l'histoire en détail</p>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-3 text-white cursor-pointer">
+                            <input type="radio" name="typeEnvoi" value="complet" class="mt-1 w-5 h-5">
+                            <div>
+                                <span class="font-semibold">Toute mon histoire avec les photos</span>
+                                <p class="text-sm text-gray-300 mt-1">Tout ce que j'ai écrit et mes photos</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded p-4 mt-4">
+                        <p class="text-blue-800 text-sm">
+                            <strong>Adresse email :</strong> validisme_signalement@proton.me
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Boutons FALC -->
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <button 
+                        type="button" 
+                        onclick="generatePDF('signalementFormFALC')" 
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-12 py-6 rounded-lg font-bold text-xl transition-colors focus:outline-none focus:ring-4 focus:ring-blue-300"
+                        tabindex="0">
+                        Télécharger en PDF
+                    </button>
+                    <button 
+                        type="submit" 
+                        class="bg-green-600 hover:bg-green-700 text-white px-12 py-6 rounded-lg font-bold text-xl transition-colors focus:outline-none focus:ring-4 focus:ring-green-300"
+                        tabindex="0">
+                        Faire le PDF et envoyer par email
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+<!-- Section Mon Carnet de Preuves -->
+    <section id="carnet" class="section bg-gray-800 border-2 border-teal-400 rounded-xl shadow-lg p-8 mb-8 hidden" role="main" aria-labelledby="carnet-title">
+        <div class="text-center mb-6">
+            <button 
+                onclick="toggleSectionFALC('carnet')" 
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-bold text-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
+                tabindex="0">
+                Version Facile a Lire et a Comprendre FALC
+            </button>
+        </div>
+
+        <h2 id="carnet-title" class="text-3xl font-bold text-teal-300 mb-6">Mon Carnet de Preuves</h2>
+
+        <!-- Version normale -->
+        <div id="carnet-normal">
+            <div class="bg-teal-50 border-l-4 border-teal-400 p-6 rounded-lg mb-6">
+                <h3 class="font-bold text-teal-800 mb-3">Un outil personnel de documentation</h3>
+                <p class="text-teal-700">
+                    Ce carnet vous permet de <strong>documenter au fil du temps</strong> les situations de validisme que vous vivez.
+                    Il est stocké <strong>localement sur votre appareil</strong> pour votre sécurité. Vous seul y avez accès.
+                </p>
+            </div>
+
+            <div class="bg-purple-50 border-l-4 border-purple-400 p-6 rounded-lg mb-6">
+                <h3 class="font-bold text-purple-800 mb-3">Pourquoi tenir un carnet ?</h3>
+                <ul class="text-purple-700 space-y-2">
+                    <li><strong>Voir les patterns :</strong> Un événement isolé peut sembler anodin, mais l'accumulation révèle un système</li>
+                    <li><strong>Prouver la répétition :</strong> Documenter la fréquence et l'escalade</li>
+                    <li><strong>Identifier les acteurs :</strong> Voir qui fait quoi, où et quand</li>
+                    <li><strong>Constituer un dossier solide :</strong> Pour médecin du travail, avocat, police, justice</li>
+                    <li><strong>Ne pas oublier :</strong> Les micro-agressions s'accumulent mais on oublie les détails</li>
+                </ul>
+            </div>
+
+            <!-- Statistiques et vues -->
+            <div class="bg-gray-700 p-6 rounded-lg mb-6">
+                <h3 class="font-bold text-white text-xl mb-4">Vue d'ensemble</h3>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-blue-600 p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold text-white" id="totalEntries">0</div>
+                        <div class="text-blue-100">Entrées totales</div>
+                    </div>
+                    <div class="bg-red-600 p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold text-white" id="last30Days">0</div>
+                        <div class="text-red-100">Ces 30 derniers jours</div>
+                    </div>
+                    <div class="bg-purple-600 p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold text-white" id="uniquePersons">0</div>
+                        <div class="text-purple-100">Personnes impliquées</div>
+                    </div>
+                </div>
+
+                <!-- Filtres et vues -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-white mb-2">Afficher par :</label>
+                        <select id="viewMode" onchange="updateCarnetView()" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                            <option value="chronologique">Chronologique (du plus récent au plus ancien)</option>
+                            <option value="type">Par type de violence</option>
+                            <option value="lieu">Par lieu/contexte</option>
+                            <option value="personne">Par personne impliquée</option>
+                            <option value="frequence">Par fréquence (les plus récurrents)</option>
+                        </select>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-white mb-2">Filtrer par type :</label>
+                            <select id="filterType" onchange="updateCarnetView()" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                                <option value="">Tous</option>
+                                <option value="discrimination">Discrimination</option>
+                                <option value="harcelement">Harcèlement</option>
+                                <option value="violence_physique">Violence physique</option>
+                                <option value="violence_psychologique">Violence psychologique</option>
+                                <option value="violence_sexuelle">Violence sexuelle</option>
+                                <option value="negligence">Négligence</option>
+                                <option value="violence_economique">Violence économique</option>
+                                <option value="violence_institutionnelle">Violence institutionnelle</option>
+                                <option value="violence_medicale">Violence médicale</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-white mb-2">Filtrer par période :</label>
+                            <select id="filterPeriod" onchange="updateCarnetView()" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                                <option value="">Toutes</option>
+                                <option value="7">7 derniers jours</option>
+                                <option value="30">30 derniers jours</option>
+                                <option value="90">3 derniers mois</option>
+                                <option value="365">1 an</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-white mb-2">Filtrer par personne/entité :</label>
+                            <select id="filterPerson" onchange="updateCarnetView()" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                                <option value="">Toutes</option>
+                                <!-- Options générées dynamiquement -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Liste des entrées -->
+            <div class="bg-gray-700 p-6 rounded-lg mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-white text-xl">Mes entrées</h3>
+                    <div class="flex gap-2">
+                        <button 
+                            onclick="exportCarnetToPDF()" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
+                            tabindex="0">
+                            Exporter tout en PDF
+                        </button>
+                        <button 
+                            onclick="exportFilteredToPDF()" 
+                            class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
+                            tabindex="0">
+                            Exporter la sélection
+                        </button>
+                    </div>
+                </div>
+                <div id="carnetEntries" class="space-y-4">
+                    <p class="text-gray-300 text-center py-8">Aucune entrée pour le moment. Commencez à documenter.</p>
+                </div>
+            </div>
+
+            <!-- Formulaire de nouvelle entrée -->
+            <div class="bg-gray-700 p-6 rounded-lg mb-6">
+                <h3 class="font-bold text-white text-xl mb-4">Nouvelle entrée</h3>
+                <form id="carnetForm" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-white mb-2">Date <span class="text-red-400">*</span></label>
+                            <input type="date" name="date" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-white mb-2">Heure (optionnel)</label>
+                            <input type="time" name="heure" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-2">Lieu/Contexte <span class="text-red-400">*</span></label>
+                        <input type="text" name="lieu" placeholder="Ex: Bureau, domicile, hôpital, école..." class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-2">Type de situation <span class="text-red-400">*</span></label>
+                        <select name="type" class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500" required>
+                            <option value="">Choisir...</option>
+                            <option value="discrimination">Discrimination</option>
+                            <option value="harcelement">Harcèlement</option>
+                            <option value="violence_physique">Violence physique</option>
+                            <option value="violence_psychologique">Violence psychologique</option>
+                            <option value="violence_sexuelle">Violence sexuelle</option>
+                            <option value="negligence">Négligence</option>
+                            <option value="violence_economique">Violence économique</option>
+                            <option value="violence_institutionnelle">Violence institutionnelle</option>
+                            <option value="violence_medicale">Violence médicale</option>
+                            <option value="diffamation">Diffamation</option>
+                            <option value="injure_publique">Injure publique</option>
+                            <option value="sabotage">Sabotage (professionnel, personnel)</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-2">Personne(s) ou entité(s) impliquée(s)</label>
+                        <input 
+                            type="text" 
+                            name="personnes" 
+                            placeholder="Ex: Manager X, Tuteur Y, PMI, Entreprise Z, Collègue A..." 
+                            class="w-full p-3 rounded bg-gray-600 text-white border border-gray-500">
+                        <p class="text-gray-400 text-sm mt-1">Séparez par des virgules si plusieurs personnes. Cela permet de voir tous les incidents liés à chaque personne.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-2">Description détaillée <span class="text-red-400">*</span></label>
+                        <textarea 
+                            name="description" 
+                            placeholder="Décrivez précisément : qui a dit/fait quoi, dans quel contexte, comment vous avez réagi, ce qui s'est passé ensuite..."
+                            class="w-full h-40 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical"
+                            required></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-2">Témoins (noms et coordonnées si possible)</label>
+                        <textarea 
+                            name="temoins" 
+                            placeholder="Nom, fonction, coordonnées. Un témoin par ligne."
+                            class="w-full h-20 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-2">Preuves numériques (liens vers publications, vidéos, articles...)</label>
+                        <textarea 
+                            name="liens" 
+                            placeholder="Collez les URLs ici, une par ligne. Ex: post Facebook, vidéo YouTube, article, capture d'écran archivée..."
+                            class="w-full h-20 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical"></textarea>
+                        <p class="text-gray-400 text-sm mt-1">Pensez à faire des captures d'écran des publications qui pourraient être supprimées.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-2">Impact sur vous</label>
+                        <textarea 
+                            name="impact" 
+                            placeholder="Comment cela vous affecte ? Santé physique/mentale, moral, travail, vie quotidienne, relations, sommeil, alimentation..."
+                            class="w-full h-20 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-2">Contexte additionnel</label>
+                        <textarea 
+                            name="contexte" 
+                            placeholder="Y a-t-il un lien avec d'autres événements ? Cela fait-il partie d'un pattern ? Y a-t-il eu une escalade ?"
+                            class="w-full h-20 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical"></textarea>
+                    </div>
+
+                    <!-- Upload de fichiers -->
+                    <div>
+                        <label class="block text-white mb-2">Fichiers joints (photos, documents, captures d'écran, enregistrements)</label>
+                        <div 
+                            id="dropZoneCarnet" 
+                            class="border-2 border-dashed border-gray-500 rounded-lg p-8 text-center cursor-pointer hover:border-teal-400 transition-colors"
+                            tabindex="0"
+                            role="button"
+                            aria-label="Zone de dépôt de fichiers">
+                            <div class="text-gray-300">
+                                <p class="text-lg">Cliquez ou glissez vos fichiers ici</p>
+                                <p class="text-sm text-gray-400 mt-2">Photos, PDF, documents, captures d'écran... (Max 5MB par fichier)</p>
+                            </div>
+                        </div>
+                        <input type="file" id="fileInputCarnet" multiple accept="image/*,.pdf,.doc,.docx,.txt" class="hidden">
+                        <div id="imagePreviewCarnet" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4"></div>
+                    </div>
+
+                    <!-- Enregistrement vocal -->
+                    <div>
+                        <label class="block text-white mb-2">Note vocale</label>
+                        <p class="text-gray-400 text-sm mb-3">Si vous ne pouvez pas écrire ou préférez parler, enregistrez votre témoignage.</p>
+                        <div class="flex gap-4 items-center">
+                            <button 
+                                type="button" 
+                                id="recordBtn" 
+                                onclick="toggleRecording()" 
+                                class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors focus:outline-none focus:ring-4 focus:ring-red-300"
+                                tabindex="0">
+                                Démarrer l'enregistrement
+                            </button>
+                            <span id="recordingStatus" class="text-gray-300"></span>
+                        </div>
+                        <div id="audioPreview" class="mt-4"></div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button 
+                            type="submit" 
+                            class="bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors focus:outline-none focus:ring-4 focus:ring-teal-300"
+                            tabindex="0">
+                            Enregistrer cette entrée
+                        </button>
+                        <button 
+                            type="reset" 
+                            class="bg-gray-600 hover:bg-gray-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors focus:outline-none focus:ring-4 focus:ring-gray-300"
+                            tabindex="0">
+                            Effacer le formulaire
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg">
+                <h3 class="font-bold text-red-800 mb-3">Sécurité et confidentialité</h3>
+                <ul class="text-red-700 space-y-2">
+                    <li><strong>Stockage local uniquement :</strong> Vos données restent sur votre appareil</li>
+                    <li><strong>Aucun envoi automatique :</strong> C'est vous qui décidez quand et à qui transmettre</li>
+                    <li><strong>Sauvegardez régulièrement :</strong> Exportez votre carnet en PDF pour ne pas le perdre</li>
+                    <li><strong>Protection :</strong> Si quelqu'un d'autre utilise votre appareil, il pourrait accéder à votre carnet</li>
+                    <li><strong>Effacement :</strong> Si vous effacez les données de votre navigateur, votre carnet sera supprimé</li>
+                </ul>
+            </div>
+        </div>
+<!-- Version FALC -->
+        <div id="carnet-falc" class="hidden">
+            <div class="bg-teal-50 border-l-8 border-teal-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-teal-800 text-2xl mb-6">C'est quoi ce carnet ?</h3>
+                <div class="text-teal-700 text-lg space-y-4">
+                    <p><strong>C'est comme un journal pour noter ce qui vous arrive de mal.</strong></p>
+                    <p>C'est gardé sur votre téléphone ou votre ordinateur.</p>
+                    <p>Personne d'autre ne peut le voir sauf si vous le montrez.</p>
+                    <p><strong>Ça reste secret.</strong></p>
+                </div>
+            </div>
+
+            <div class="bg-purple-50 border-l-8 border-purple-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-purple-800 text-2xl mb-6">Pourquoi noter ?</h3>
+                <div class="text-purple-700 text-lg space-y-4">
+                    <p><strong>Pour ne pas oublier ce qui s'est passé.</strong></p>
+                    <p>Quand on vous fait du mal plusieurs fois, c'est dur de se souvenir de tout.</p>
+                    <p><strong>Une fois, ça peut paraître pas grave.</strong></p>
+                    <p><strong>Mais plein de fois, ça montre que c'est du harcèlement.</strong></p>
+                    <p>Si vous écrivez tout, vous pourrez montrer à :</p>
+                    <ul class="ml-6 space-y-2">
+                        <li>Un avocat</li>
+                        <li>La police</li>
+                        <li>Un docteur</li>
+                        <li>Le médecin du travail</li>
+                        <li>Un juge</li>
+                        <li>Quelqu'un qui peut vous aider</li>
+                    </ul>
+                    <p><strong>Vous pourrez prouver que c'est arrivé plein de fois.</strong></p>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 border-l-8 border-yellow-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-yellow-800 text-2xl mb-6">Qu'est-ce que vous pouvez noter ?</h3>
+                <div class="text-yellow-700 text-lg space-y-3">
+                    <ul class="ml-6 space-y-3">
+                        <li><strong>Quand :</strong> Le jour et l'heure</li>
+                        <li><strong>Où :</strong> L'endroit où ça s'est passé</li>
+                        <li><strong>Quoi :</strong> Ce qui vous est arrivé</li>
+                        <li><strong>Qui :</strong> La personne qui vous a fait du mal</li>
+                        <li><strong>Les témoins :</strong> Les personnes qui ont vu</li>
+                        <li><strong>Des photos :</strong> Si vous en avez</li>
+                        <li><strong>Des liens internet :</strong> Si c'est sur Facebook ou autre</li>
+                        <li><strong>Votre voix :</strong> Si vous ne pouvez pas écrire</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Statistiques FALC -->
+            <div class="bg-gray-700 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-white text-xl mb-6">Ce que vous avez noté</h3>
+                
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-blue-600 p-6 rounded-lg text-center">
+                        <div class="text-4xl font-bold text-white" id="totalEntriesFALC">0</div>
+                        <div class="text-blue-100 text-lg">fois où vous avez noté quelque chose</div>
+                    </div>
+                    <div class="bg-red-600 p-6 rounded-lg text-center">
+                        <div class="text-4xl font-bold text-white" id="last30DaysFALC">0</div>
+                        <div class="text-red-100 text-lg">fois ce mois-ci</div>
+                    </div>
+                    <div class="bg-purple-600 p-6 rounded-lg text-center">
+                        <div class="text-4xl font-bold text-white" id="uniquePersonsFALC">0</div>
+                        <div class="text-purple-100 text-lg">personnes différentes</div>
+                    </div>
+                </div>
+
+                <!-- Filtres FALC -->
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Comment voulez-vous voir vos notes ?</label>
+                        <select id="viewModeFALC" onchange="updateCarnetViewFALC()" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                            <option value="chronologique">Du plus récent au plus ancien</option>
+                            <option value="type">Par type (toutes les discriminations ensemble, tous les harcèlements ensemble...)</option>
+                            <option value="lieu">Par endroit (tout ce qui s'est passé au travail, tout ce qui s'est passé à l'hôpital...)</option>
+                            <option value="personne">Par personne (tout ce que X m'a fait, tout ce que Y m'a fait...)</option>
+                            <option value="frequence">Par ce qui arrive le plus souvent</option>
+                        </select>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Voir seulement un type :</label>
+                            <select id="filterTypeFALC" onchange="updateCarnetViewFALC()" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                                <option value="">Tout voir</option>
+                                <option value="discrimination">Discrimination</option>
+                                <option value="harcelement">Harcèlement</option>
+                                <option value="violence_physique">Violence physique</option>
+                                <option value="violence_psychologique">Violence psychologique</option>
+                                <option value="violence_sexuelle">Violence sexuelle</option>
+                                <option value="negligence">Négligence</option>
+                                <option value="violence_economique">Violence économique</option>
+                                <option value="violence_institutionnelle">Violence institutionnelle</option>
+                                <option value="violence_medicale">Violence médicale</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Voir seulement une période :</label>
+                            <select id="filterPeriodFALC" onchange="updateCarnetViewFALC()" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                                <option value="">Tout voir</option>
+                                <option value="7">Les 7 derniers jours</option>
+                                <option value="30">Les 30 derniers jours</option>
+                                <option value="90">Les 3 derniers mois</option>
+                                <option value="365">L'année dernière</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Voir seulement une personne :</label>
+                        <select id="filterPersonFALC" onchange="updateCarnetViewFALC()" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                            <option value="">Toutes les personnes</option>
+                            <!-- Options générées automatiquement -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Liste des entrées FALC -->
+            <div class="bg-gray-700 p-8 rounded-lg mb-8">
+                <div class="flex flex-col gap-4 mb-6">
+                    <h3 class="font-bold text-white text-xl">Ce que j'ai déjà noté</h3>
+                    <div class="flex flex-col gap-2">
+                        <button 
+                            onclick="exportCarnetToPDF(true)" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-lg text-lg font-bold transition-colors"
+                            tabindex="0">
+                            Télécharger tout en PDF
+                        </button>
+                        <button 
+                            onclick="exportFilteredToPDF(true)" 
+                            class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-4 rounded-lg text-lg font-bold transition-colors"
+                            tabindex="0">
+                            Télécharger seulement ce qui est affiché
+                        </button>
+                    </div>
+                </div>
+                <div id="carnetEntriesFALC" class="space-y-4">
+                    <p class="text-gray-300 text-center py-8 text-lg">Vous n'avez rien noté pour l'instant.</p>
+                </div>
+            </div>
+
+            <!-- Formulaire FALC -->
+            <div class="bg-gray-700 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-white text-xl mb-6">Noter quelque chose de nouveau</h3>
+                <form id="carnetFormFALC" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Quel jour ? <span class="text-red-400 text-xl">*</span></label>
+                            <input type="date" name="date" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg" required>
+                        </div>
+                        <div>
+                            <label class="block text-white mb-3 text-lg">Quelle heure ? (pas obligatoire)</label>
+                            <input type="time" name="heure" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Où ça s'est passé ? <span class="text-red-400 text-xl">*</span></label>
+                        <input type="text" name="lieu" placeholder="L'endroit..." class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg" required>
+                        <p class="text-gray-400 text-sm mt-2">Exemple : Au bureau, chez le docteur, à la maison, dans le bus...</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Quel type de problème ? <span class="text-red-400 text-xl">*</span></label>
+                        <select name="type" class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg" required>
+                            <option value="">Choisir...</option>
+                            <option value="discrimination">Discrimination (on me traite mal à cause de mon handicap)</option>
+                            <option value="harcelement">Harcèlement (on m'embête souvent)</option>
+                            <option value="violence_physique">Violence physique (on m'a frappé)</option>
+                            <option value="violence_psychologique">Violence psychologique (on m'a dit des méchancetés)</option>
+                            <option value="violence_sexuelle">Violence sexuelle</option>
+                            <option value="negligence">Négligence (on ne s'occupe pas de moi)</option>
+                            <option value="violence_economique">Violence économique (on prend mon argent)</option>
+                            <option value="violence_institutionnelle">Violence dans une institution</option>
+                            <option value="violence_medicale">Violence chez le docteur</option>
+                            <option value="diffamation">Diffamation (on dit des mensonges sur moi)</option>
+                            <option value="injure_publique">Injures (on m'insulte)</option>
+                            <option value="sabotage">Sabotage (on m'empêche de réussir)</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Qui vous a fait du mal ?</label>
+                        <input 
+                            type="text" 
+                            name="personnes" 
+                            placeholder="Le nom de la personne ou de l'entreprise..." 
+                            class="w-full p-4 rounded bg-gray-600 text-white border border-gray-500 text-lg">
+                        <p class="text-gray-400 text-sm mt-2">
+                            <strong>Important :</strong> Si plusieurs personnes, séparez par des virgules.
+                            Exemple : "Mon tuteur, Mon collègue Jean, La PMI"
+                        </p>
+                        <p class="text-gray-400 text-sm mt-1">
+                            Ça permet de voir toutes les fois où cette personne vous a fait du mal.
+                        </p>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Racontez ce qui s'est passé <span class="text-red-400 text-xl">*</span></label>
+                        <textarea 
+                            name="description" 
+                            placeholder="Écrivez tout ce dont vous vous souvenez : qui a fait quoi ? Qui a dit quoi ? Qu'est-ce que vous avez ressenti ?"
+                            class="w-full h-48 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical text-lg"
+                            required></textarea>
+                        <p class="text-gray-400 text-sm mt-2">Plus vous donnez de détails, mieux c'est.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Est-ce que des gens ont vu ? (pas obligatoire)</label>
+                        <textarea 
+                            name="temoins" 
+                            placeholder="Leur nom, comment les contacter..."
+                            class="w-full h-24 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical text-lg"></textarea>
+                        <p class="text-gray-400 text-sm mt-2">Un témoin par ligne. Exemple : "Marie Dupont, collègue, 06 12 34 56 78"</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Des liens internet ? (pas obligatoire)</label>
+                        <textarea 
+                            name="liens" 
+                            placeholder="Si c'est sur Facebook, YouTube... mettez le lien ici"
+                            class="w-full h-24 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical text-lg"></textarea>
+                        <p class="text-gray-400 text-sm mt-2">Un lien par ligne. Pensez à faire des captures d'écran !</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Comment ça vous affecte ? (pas obligatoire)</label>
+                        <textarea 
+                            name="impact" 
+                            placeholder="Comment vous vous sentez ? Est-ce que ça change votre vie ? Est-ce que vous dormez mal ? Est-ce que vous avez peur ?"
+                            class="w-full h-24 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical text-lg"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Autres informations (pas obligatoire)</label>
+                        <textarea 
+                            name="contexte" 
+                            placeholder="Est-ce que c'est arrivé d'autres fois ? Est-ce que ça empire ?"
+                            class="w-full h-24 p-4 rounded bg-gray-600 text-white border border-gray-500 resize-vertical text-lg"></textarea>
+                    </div>
+
+                    <!-- Upload fichiers FALC -->
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Ajouter des photos ou documents (pas obligatoire)</label>
+                        <div 
+                            id="dropZoneCarnetFALC" 
+                            class="border-2 border-dashed border-gray-500 rounded-lg p-8 text-center cursor-pointer hover:border-teal-400 transition-colors"
+                            tabindex="0"
+                            role="button"
+                            aria-label="Zone de dépôt de fichiers">
+                            <div class="text-gray-300">
+                                <p class="text-lg">Cliquez ici pour ajouter des fichiers</p>
+                                <p class="text-sm text-gray-400 mt-2">Photos, captures d'écran, documents...</p>
+                            </div>
+                        </div>
+                        <input type="file" id="fileInputCarnetFALC" multiple accept="image/*,.pdf,.doc,.docx,.txt" class="hidden">
+                        <div id="imagePreviewCarnetFALC" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4"></div>
+                    </div>
+
+                    <!-- Enregistrement vocal FALC -->
+                    <div>
+                        <label class="block text-white mb-3 text-lg">Enregistrer votre voix (pas obligatoire)</label>
+                        <div class="bg-blue-50 border border-blue-200 rounded p-4 mb-4">
+                            <p class="text-blue-800 text-base">
+                                <strong>Si vous ne pouvez pas écrire, vous pouvez parler.</strong>
+                                <br>Cliquez sur "Démarrer" et racontez votre histoire.
+                                <br>Cliquez sur "Arrêter" quand vous avez fini.
+                            </p>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <button 
+                                type="button" 
+                                id="recordBtnFALC" 
+                                onclick="toggleRecordingFALC()" 
+                                class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors focus:outline-none focus:ring-4 focus:ring-red-300"
+                                tabindex="0">
+                                Démarrer
+                            </button>
+                            <span id="recordingStatusFALC" class="text-gray-300 text-lg font-bold"></span>
+                        </div>
+                        <div id="audioPreviewFALC" class="mt-4"></div>
+                    </div>
+
+                    <div class="bg-yellow-50 border border-yellow-200 rounded p-4">
+                        <p class="text-yellow-800 text-base">
+                            <strong>Les champs avec <span class="text-red-600">*</span> sont obligatoires.</strong>
+                            <br>Le reste, c'est si vous pouvez ou si vous voulez.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col gap-4">
+                        <button 
+                            type="submit" 
+                            class="bg-teal-600 hover:bg-teal-700 text-white px-12 py-6 rounded-lg font-bold text-xl transition-colors focus:outline-none focus:ring-4 focus:ring-teal-300"
+                            tabindex="0">
+                            Enregistrer
+                        </button>
+                        <button 
+                            type="reset" 
+                            class="bg-gray-600 hover:bg-gray-700 text-white px-12 py-6 rounded-lg font-bold text-xl transition-colors focus:outline-none focus:ring-4 focus:ring-gray-300"
+                            tabindex="0">
+                            Tout effacer pour recommencer
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="bg-red-50 border-l-8 border-red-500 p-8 rounded-lg">
+                <h3 class="font-bold text-red-800 text-2xl mb-6">Important pour votre sécurité</h3>
+                <div class="text-red-700 text-lg space-y-4">
+                    <p><strong>Vos notes restent sur votre téléphone ou ordinateur.</strong></p>
+                    <p>On ne les envoie nulle part automatiquement.</p>
+                    <p><strong>C'est vous qui décidez de les montrer ou pas.</strong></p>
+                    <p>Pensez à télécharger le PDF régulièrement.</p>
+                    <p>Comme ça, si votre téléphone ou ordinateur casse, vous ne perdez pas vos notes.</p>
+                    <p><strong>Attention :</strong> Si quelqu'un d'autre utilise votre appareil, il peut voir vos notes.</p>
+                    <p><strong>Si vous effacez vos données internet, vos notes seront effacées aussi.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Section Violentomètre -->
+    <section id="violentometre" class="section bg-gray-800 border-2 border-purple-400 rounded-xl shadow-lg p-8 mb-8 hidden" role="main" aria-labelledby="violentometre-title">
+        <div class="text-center mb-6">
+            <button 
+                onclick="toggleSectionFALC('violentometre')" 
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-bold text-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
+                tabindex="0">
+                Version Facile a Lire et a Comprendre FALC
+            </button>
+        </div>
+
+        <h2 id="violentometre-title" class="text-3xl font-bold text-purple-300 mb-6">Violentometre Validiste</h2>
+
+        <!-- Version normale -->
+        <div id="violentometre-normal">
+            <div class="bg-purple-50 border-l-4 border-purple-400 p-6 rounded-lg mb-6">
+                <h3 class="font-bold text-purple-800 mb-3">Évaluer une situation</h3>
+                <p class="text-purple-700">
+                    Cet outil vous aide à identifier et évaluer les différentes formes de validisme. 
+                    Il s'inspire du violentomètre développé pour les violences conjugales, adapté aux spécificités du validisme.
+                </p>
+            </div>
+
+            <div class="grid gap-6">
+                <!-- Zone verte - INCLUSIF -->
+                <div class="bg-green-100 border-l-8 border-green-500 p-6 rounded-lg">
+                    <h3 class="font-bold text-green-800 text-2xl mb-4">INCLUSIF</h3>
+                    <p class="text-green-700 mb-4 font-semibold">Comportements respectueux de la dignité, de l'autonomie et de l'égalité.</p>
+                    <ul class="text-green-700 space-y-2">
+                        <li>Me demander directement mes besoins sans parler à ma place</li>
+                        <li>Proposer des aménagements sans les imposer</li>
+                        <li>Utiliser un langage non-validiste</li>
+                        <li>Inclure sans infantiliser</li>
+                        <li>Respecter mon rythme, mon mode de communication, mes choix</li>
+                        <li>Valoriser mes compétences, pas mon "courage"</li>
+                        <li>Reconnaître que je suis la/le mieux placé·e pour parler de mon handicap</li>
+                        <li>Lutter avec moi contre les discriminations systémiques</li>
+                    </ul>
+                    <div class="bg-green-50 p-4 rounded mt-4 border-l-4 border-green-600">
+                        <p class="text-green-800 font-bold">Tout va bien : on vous respecte et on vous inclut</p>
+                    </div>
+                </div>
+
+                <!-- Zone orange - PROBLÉMATIQUE -->
+                <div class="bg-orange-100 border-l-8 border-orange-500 p-6 rounded-lg">
+                    <h3 class="font-bold text-orange-800 text-2xl mb-4">PROBLÉMATIQUE</h3>
+                    <p class="text-orange-700 mb-4 font-semibold">Comportements paternalistes, stigmatisants ou condescendants qui limitent mes droits.</p>
+                    <ul class="text-orange-700 space-y-2">
+                        <li>Me parler comme à un·e enfant</li>
+                        <li>Décider à ma place "pour mon bien"</li>
+                        <li>Refuser de faire des aménagements "parce que c'est compliqué"</li>
+                        <li>Faire des blagues sur le handicap, même "gentilles"</li>
+                        <li>M'exclure des activités "parce que ça va être trop dur pour toi"</li>
+                        <li>Me féliciter pour des choses ordinaires</li>
+                        <li>Me coller une étiquette de "courageux·se" ou de "fardeau"</li>
+                        <li>Réduire mon identité à mon handicap</li>
+                        <li>Supposer que je ne peux pas comprendre, travailler, aimer, militer…</li>
+                    </ul>
+                    <div class="bg-orange-50 p-4 rounded mt-4 border-l-4 border-orange-600">
+                        <p class="text-orange-800 font-bold">Attention : c'est pas très respectueux</p>
+                    </div>
+                </div>
+
+                <!-- Zone rouge - VALIDISME VIOLENT -->
+                <div class="bg-red-100 border-l-8 border-red-500 p-6 rounded-lg">
+                    <h3 class="font-bold text-red-800 text-2xl mb-4">VALIDISME VIOLENT</h3>
+                    <p class="text-red-700 mb-4 font-semibold">Violences systémiques, institutionnelles, psychologiques ou physiques.</p>
+                    <ul class="text-red-700 space-y-2">
+                        <li>Refuser mes droits (éducation, emploi, logement, santé…)</li>
+                        <li>Se moquer ou humilier à cause du handicap, dans la vraie vie ou sur les réseaux sociaux</li>
+                        <li>Parler à ma place ou m'effacer de décisions me concernant</li>
+                        <li>Me forcer à un traitement, un placement, une stérilisation</li>
+                        <li>Utiliser le handicap comme une insulte, comme un stéréotype négatif</li>
+                        <li>M'empêcher de vivre de manière autonome</li>
+                        <li>Me faire culpabiliser d'avoir besoin d'aide ou d'aménagements</li>
+                        <li>Me faire taire quand je parle de validisme</li>
+                        <li>Me signaler à des services sociaux sans mon consentement</li>
+                        <li>Ne pas croire mes vécus de violences</li>
+                        <li>Utiliser mon handicap pour me discréditer ou me faire peur</li>
+                    </ul>
+                    <div class="bg-red-50 p-4 rounded mt-4 border-l-4 border-red-600">
+                        <p class="text-red-800 font-bold">C'est très grave : c'est du validisme violent</p>
+                        <p class="text-red-700 mt-2">Contactez immédiatement le 17 (Police), le 15 (SAMU), le 114 (SMS), le 3919 (Violences Femmes Info) ou le 01 40 47 06 06 (Femmes handicapées)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border-2 border-blue-400 rounded-lg p-6 mt-6">
+                <h3 class="font-bold text-blue-800 mb-4 text-xl">Numéros utiles</h3>
+                <div class="grid md:grid-cols-2 gap-6 text-blue-700">
+                    <div>
+                        <p class="font-bold mb-3 text-lg">Urgences :</p>
+                        <ul class="space-y-2">
+                            <li><strong>17</strong> - Police/Gendarmerie</li>
+                            <li><strong>15</strong> - SAMU</li>
+                            <li><strong>114</strong> - SMS urgences (sourds/malentendants)</li>
+                            <li><strong>3919</strong> - Violences Femmes Info</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-3 text-lg">Écoute et orientation :</p>
+                        <ul class="space-y-2">
+                            <li><strong>01 40 47 06 06</strong> - Femmes pour le Dire, Femmes pour Agir</li>
+                            <li><strong>116 006</strong> - Victimes d'infractions</li>
+                            <li><strong>0 800 111 135</strong> - Maltraitance personnes âgées/handicapées</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-4 p-4 bg-blue-100 rounded">
+                    <p class="text-blue-800 font-semibold">Services LSF (Langue des Signes Française) :</p>
+                    <ul class="text-blue-700 mt-2 space-y-1">
+                        <li><strong>114</strong> - Numéro d'urgence SMS et Fax</li>
+                        <li><a href="https://mobile.interieur.gouv.fr/Archives/Archives-des-dossiers-de-presse/Le-114-numero-d-urgence-pour-les-personnes-sourdes-et-malentendantes" target="_blank" class="underline">Plus d'infos sur le 114</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Version FALC -->
+        <div id="violentometre-falc" class="hidden">
+            <div class="bg-purple-50 border-l-8 border-purple-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-purple-800 text-2xl mb-6">C'est quoi ce violentomètre ?</h3>
+                <div class="text-purple-700 text-lg space-y-4">
+                    <p><strong>C'est un outil pour savoir si on vous respecte ou si on vous fait du mal.</strong></p>
+                    <p>Il y a 3 couleurs :</p>
+                    <ul class="ml-6 space-y-2">
+                        <li><strong class="text-green-600">Vert :</strong> Tout va bien, on vous respecte</li>
+                        <li><strong class="text-orange-600">Orange :</strong> Attention, c'est pas bien</li>
+                        <li><strong class="text-red-600">Rouge :</strong> C'est très grave, il faut de l'aide</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid gap-6">
+                <!-- Zone verte FALC -->
+                <div class="bg-green-50 border-l-8 border-green-500 p-8 rounded-lg">
+                    <h3 class="font-bold text-green-800 text-2xl mb-6">INCLUSIF - Tout va bien</h3>
+                    <p class="text-green-700 mb-4 text-lg font-semibold">On vous respecte et on vous inclut</p>
+                    <ul class="text-green-700 text-lg space-y-3 ml-6">
+                        <li>Quand vous dites ce dont vous avez besoin, on vous écoute et on vous aide.</li>
+                        <li>Quand on vous propose de participer à une activité, on vous demande votre avis.</li>
+                        <li>On vous explique les choses clairement et on respecte votre façon de parler ou de communiquer.</li>
+                        <li>On adapte les choses pour que vous soyez à l'aise.</li>
+                        <li>On respecte vos choix, vos habitudes, votre rythme.</li>
+                    </ul>
+                </div>
+
+                <!-- Zone orange FALC -->
+                <div class="bg-orange-50 border-l-8 border-orange-500 p-8 rounded-lg">
+                    <h3 class="font-bold text-orange-800 text-2xl mb-6">PROBLÉMATIQUE - Attention</h3>
+                    <p class="text-orange-700 mb-4 text-lg font-semibold">C'est pas très respectueux</p>
+                    <ul class="text-orange-700 text-lg space-y-3 ml-6">
+                        <li>On vous parle comme à un enfant, ou avec pitié.</li>
+                        <li>On pense que vous n'êtes pas capable de savoir ce qui est bon pour vous.</li>
+                        <li>On oublie de vous aider à accéder à des endroits ou des infos.</li>
+                        <li>On ne pense pas à vous demander votre avis ou à faire des aménagements.</li>
+                        <li>On vous dit de faire des efforts sans écouter vos difficultés.</li>
+                    </ul>
+                    <div class="bg-orange-100 border-2 border-orange-400 rounded p-6 mt-6">
+                        <p class="text-orange-800 font-bold text-lg">Que faire ?</p>
+                        <p class="text-orange-700 text-base mt-2">Vous pouvez dire que ça ne vous plaît pas. Vous pouvez demander de l'aide à quelqu'un de confiance.</p>
+                    </div>
+                </div>
+
+                <!-- Zone rouge FALC -->
+                <div class="bg-red-50 border-l-8 border-red-500 p-8 rounded-lg">
+                    <h3 class="font-bold text-red-800 text-2xl mb-6">VALIDISME VIOLENT - C'est très grave</h3>
+                    <p class="text-red-700 mb-4 text-lg font-semibold">C'est du validisme violent</p>
+                    <ul class="text-red-700 text-lg space-y-3 ml-6">
+                        <li>On vous empêche d'aller à l'école, de travailler, de vous soigner ou d'avoir un logement.</li>
+                        <li>On se moque de vous ou on vous insulte à cause de votre handicap, dans la vraie vie ou en ligne.</li>
+                        <li>On utilise le handicap comme une insulte, comme quelque chose de mal.</li>
+                        <li>On prend des décisions à votre place sans vous demander.</li>
+                        <li>On vous fait du mal, on vous force à faire quelque chose ou on vous culpabilise.</li>
+                        <li>On ne vous laisse pas utiliser vos outils pour vous sentir bien.</li>
+                        <li>On vous punit ou on vous crie dessus à cause de vos difficultés.</li>
+                    </ul>
+                    <div class="bg-red-100 border-2 border-red-400 rounded p-6 mt-6">
+                        <p class="text-red-800 font-bold text-xl mb-4">IL FAUT APPELER TOUT DE SUITE</p>
+                        <ul class="text-red-700 text-lg space-y-2">
+                            <li><strong>17</strong> pour la police</li>
+                            <li><strong>15</strong> si vous êtes blessé</li>
+                            <li><strong>114</strong> par SMS si vous êtes sourd</li>
+                            <li><strong>3919</strong> pour les femmes qui subissent des violences</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border-2 border-blue-400 rounded-lg p-8 mt-8">
+                <h3 class="font-bold text-blue-800 mb-6 text-2xl">Numéros pour demander de l'aide</h3>
+                <div class="grid md:grid-cols-2 gap-8 text-blue-700 text-lg">
+                    <div>
+                        <p class="font-bold mb-4 text-xl">Si c'est urgent :</p>
+                        <ul class="space-y-3">
+                            <li><strong class="text-2xl">17</strong> - Police</li>
+                            <li><strong class="text-2xl">15</strong> - Si vous êtes blessé</li>
+                            <li><strong class="text-2xl">114</strong> - SMS si vous êtes sourd</li>
+                            <li><strong class="text-2xl">3919</strong> - Aide aux femmes</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-4 text-xl">Pour parler et avoir des conseils :</p>
+                        <ul class="space-y-3">
+                            <li><strong>01 40 47 06 06</strong> - Aide aux femmes handicapées</li>
+                            <li><strong>116 006</strong> - Aide aux victimes</li>
+                            <li><strong>0 800 111 135</strong> - Maltraitance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Section Cadre Légal -->
+    <section id="legal" class="section bg-gray-800 border-2 border-red-400 rounded-xl shadow-lg p-8 mb-8 hidden" role="main" aria-labelledby="legal-title">
+        <div class="text-center mb-6">
+            <button 
+                onclick="toggleSectionFALC('legal')" 
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-bold text-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
+                tabindex="0">
+                Version Facile a Lire et a Comprendre FALC
+            </button>
+        </div>
+
+        <h2 id="legal-title" class="text-3xl font-bold text-red-300 mb-6">Cadre legal et sanctions</h2>
+
+        <!-- Version normale -->
+        <div id="legal-normal">
+            <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg mb-6">
+                <h3 class="font-bold text-red-800 mb-3">Vos droits sont protégés par la loi</h3>
+                <p class="text-red-700">
+                    Le validisme est sanctionné par la loi française. Voici un aperçu des principales infractions et de leurs sanctions.
+                    Tous les liens renvoient vers les textes officiels sur Légifrance.
+                </p>
+            </div>
+
+            <div class="bg-gray-700 p-6 rounded-lg mb-6">
+                <h3 class="font-bold text-white text-xl mb-6">Sanctions pénales principales</h3>
+                <div class="space-y-4 text-white">
+                    <div class="border-l-4 border-red-400 pl-4">
+                        <p class="font-semibold">Discrimination</p>
+                        <p class="text-gray-300">Jusqu'à 3 ans de prison et 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006417678/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article 225-2 du Code pénal</a>
+                    </div>
+
+                    <div class="border-l-4 border-orange-400 pl-4">
+                        <p class="font-semibold">Harcèlement</p>
+                        <p class="text-gray-300">Jusqu'à 2 ans de prison et 30 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037289688/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article 222-33-2 du Code pénal</a>
+                    </div>
+
+                    <div class="border-l-4 border-red-400 pl-4">
+                        <p class="font-semibold">Violences simples</p>
+                        <p class="text-gray-300">Jusqu'à 3 ans de prison et 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006417655/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article 222-13 du Code pénal</a>
+                    </div>
+
+                    <div class="border-l-4 border-purple-400 pl-4">
+                        <p class="font-semibold">Violences par personne en autorité</p>
+                        <p class="text-gray-300">Peines aggravées (tuteur, curateur, soignant, éducateur...)</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006417655/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article 222-13 du Code pénal</a>
+                    </div>
+
+                    <div class="border-l-4 border-blue-400 pl-4">
+                        <p class="font-semibold">Stationnement PMR illégal</p>
+                        <p class="text-gray-300">135 euros d'amende + fourrière possible</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000023096896/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article R417-11 du Code de la route</a>
+                    </div>
+
+                    <div class="border-l-4 border-green-400 pl-4">
+                        <p class="font-semibold">Non-accessibilité ERP (Établissements Recevant du Public)</p>
+                        <p class="text-gray-300">Jusqu'à 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006896315/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article L152-4 du Code de la construction</a>
+                    </div>
+
+                    <div class="border-l-4 border-yellow-400 pl-4">
+                        <p class="font-semibold">Refus de scolarisation</p>
+                        <p class="text-gray-300">Discrimination punissable : 3 ans de prison, 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006417678/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article 225-2 du Code pénal</a>
+                    </div>
+
+                    <div class="border-l-4 border-pink-400 pl-4">
+                        <p class="font-semibold">Orientation forcée / Non-respect du PPS</p>
+                        <p class="text-gray-300">Violation du droit à l'éducation inclusive et manquement aux obligations légales</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071191/LEGISCTA000006166741/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article L351-1 du Code de l'éducation</a>
+                    </div>
+
+                    <div class="border-l-4 border-indigo-400 pl-4">
+                        <p class="font-semibold">Discrimination médicale</p>
+                        <p class="text-gray-300">Sanctions disciplinaires + pénales possibles</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072665/LEGISCTA000006171171/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article L1110-3 du Code de la santé publique</a>
+                    </div>
+
+                    <div class="border-l-4 border-teal-400 pl-4">
+                        <p class="font-semibold">Refus d'embarquement dans les transports</p>
+                        <p class="text-gray-300">Discrimination + sanctions administratives</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000023086525/LEGISCTA000023069071/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article L1112-1 du Code des transports</a>
+                    </div>
+
+                    <div class="border-l-4 border-red-400 pl-4">
+                        <p class="font-semibold">Refus de vente/service</p>
+                        <p class="text-gray-300">Jusqu'à 3 ans de prison et 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000005634379/LEGISCTA000006161283/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Code de commerce</a>
+                    </div>
+
+                    <div class="border-l-4 border-orange-400 pl-4">
+                        <p class="font-semibold">Violences institutionnelles (IME, ESAT, FAM, MAS...)</p>
+                        <p class="text-gray-300">Sanctions disciplinaires + pénales + fermeture possible</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074069/LEGISCTA000006157614/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article L311-3 du Code de l'action sociale</a>
+                    </div>
+
+                    <div class="border-l-4 border-purple-400 pl-4">
+                        <p class="font-semibold">Non-respect du contrat de séjour</p>
+                        <p class="text-gray-300">Sanctions administratives + recours usager</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006797393/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article L311-4 du Code de l'action sociale</a>
+                    </div>
+
+                    <div class="border-l-4 border-blue-400 pl-4">
+                        <p class="font-semibold">Discrimination en ESAT</p>
+                        <p class="text-gray-300">Sanctions pénales + droit du travail</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000006178217/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article L344-1 du Code de l'action sociale</a>
+                    </div>
+
+                    <div class="border-l-4 border-red-400 pl-4">
+                        <p class="font-semibold">Soins forcés / Stérilisation forcée</p>
+                        <p class="text-gray-300">Violences aggravées + sanctions disciplinaires médicales</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006685767/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article L1111-4 du Code de la santé publique</a>
+                    </div>
+
+                    <div class="border-l-4 border-yellow-400 pl-4">
+                        <p class="font-semibold">Abus de tutelle/curatelle</p>
+                        <p class="text-gray-300">Sanctions pénales + révocation + dommages-intérêts</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070721/LEGISCTA000006136540/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Code civil</a>
+                    </div>
+
+                    <div class="border-l-4 border-pink-400 pl-4">
+                        <p class="font-semibold">Atteinte à l'intimité / vie sexuelle</p>
+                        <p class="text-gray-300">Jusqu'à 1 an de prison et 15 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006797393/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Article L311-3 du Code de l'action sociale</a>
+                    </div>
+
+                    <div class="border-l-4 border-indigo-400 pl-4">
+                        <p class="font-semibold">Empêchement mariage / parentalité</p>
+                        <p class="text-gray-300">Discrimination + atteinte aux droits fondamentaux</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070721/LEGISCTA000006136124/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Code civil</a>
+                    </div>
+
+                    <div class="border-l-4 border-teal-400 pl-4">
+                        <p class="font-semibold">Refus de location à cause du handicap</p>
+                        <p class="text-gray-300">Jusqu'à 3 ans de prison et 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000509310/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Loi du 6 juillet 1989</a>
+                    </div>
+
+                    <div class="border-l-4 border-green-400 pl-4">
+                        <p class="font-semibold">Logement non accessible</p>
+                        <p class="text-gray-300">Sanctions pénales pour constructeur/bailleur</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074096/LEGISCTA000006176244/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Code de la construction</a>
+                    </div>
+
+                    <div class="border-l-4 border-orange-400 pl-4">
+                        <p class="font-semibold">Refus d'accès chien guide / assistance</p>
+                        <p class="text-gray-300">Jusqu'à 3 ans de prison et 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071367/LEGISCTA000006152303/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Code rural</a>
+                    </div>
+
+                    <div class="border-l-4 border-purple-400 pl-4">
+                        <p class="font-semibold">Contenus discriminatoires médias</p>
+                        <p class="text-gray-300">Sanctions ARCOM (amendes, suspension)</p>
+                        <a href="https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006068930/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">Loi du 30 septembre 1986</a>
+                    </div>
+
+                    <div class="border-l-4 border-red-400 pl-4">
+                        <p class="font-semibold">Contenus haineux en ligne</p>
+                        <p class="text-gray-300">Obligation de retrait + sanctions</p>
+                        <a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000801164/" target="_blank" class="text-red-400 hover:text-red-300 underline text-sm">LCEN 2004</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
+                <h3 class="font-bold text-blue-800 mb-3">Comment porter plainte ?</h3>
+                <ul class="text-blue-700 space-y-2">
+                    <li>Au commissariat ou à la gendarmerie (ils ne peuvent pas refuser votre plainte)</li>
+                    <li>Par courrier au Procureur de la République</li>
+                    <li>En ligne sur le site du ministère de l'Intérieur</li>
+                    <li>Vous pouvez vous faire accompagner par une association</li>
+                </ul>
+            </div>
+        </div>
+<!-- Version FALC -->
+        <div id="legal-falc" class="hidden">
+            <div class="bg-red-50 border-l-8 border-red-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-red-800 text-2xl mb-6">La loi vous protège</h3>
+                <div class="text-red-700 text-lg space-y-4">
+                    <p><strong>Si on vous fait du mal à cause de votre handicap, c'est interdit par la loi.</strong></p>
+                    <p>Les personnes qui font du mal peuvent :</p>
+                    <ul class="ml-6 space-y-2">
+                        <li>Aller en prison</li>
+                        <li>Payer une amende (beaucoup d'argent)</li>
+                        <li>Être punis par leur patron</li>
+                    </ul>
+                    <p><strong>Vous avez le droit d'être respecté.</strong></p>
+                </div>
+            </div>
+
+            <div class="bg-gray-700 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-white text-xl mb-6">Exemples de punitions</h3>
+                <div class="space-y-6 text-white">
+                    <div class="border-l-8 border-red-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Discrimination</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand on vous traite mal à cause de votre handicap</p>
+                        <p class="text-yellow-300 font-semibold">Jusqu'à 3 ans de prison et 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006417678/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-orange-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Harcèlement</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand on vous embête souvent</p>
+                        <p class="text-yellow-300 font-semibold">Jusqu'à 2 ans de prison et 30 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037289688/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-red-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Violences</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand on vous frappe ou on vous fait mal</p>
+                        <p class="text-yellow-300 font-semibold">Jusqu'à 3 ans de prison et 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006417655/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-purple-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Violences par quelqu'un qui vous surveille</p>
+                        <p class="text-gray-300 mb-2 text-lg">Votre tuteur, votre curateur, un docteur, un éducateur...</p>
+                        <p class="text-yellow-300 font-semibold">Punition encore plus forte</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006417655/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-blue-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Se garer sur les places handicapés</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand quelqu'un prend votre place de parking</p>
+                        <p class="text-yellow-300 font-semibold">135 euros d'amende + la voiture peut être emmenée</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000023096896/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-green-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Lieux pas accessibles</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand les magasins, restaurants ne sont pas accessibles</p>
+                        <p class="text-yellow-300 font-semibold">Jusqu'à 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006896315/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-yellow-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Refuser un enfant à l'école</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand l'école refuse un enfant handicapé</p>
+                        <p class="text-yellow-300 font-semibold">3 ans de prison et 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006417678/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-pink-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Forcer à aller dans une école spéciale</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand on vous oblige à aller dans un établissement spécialisé sans votre accord</p>
+                        <p class="text-yellow-300 font-semibold">C'est interdit par la loi</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071191/LEGISCTA000006166741/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-indigo-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Docteur qui refuse de vous soigner</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand le docteur refuse de vous soigner à cause de votre handicap</p>
+                        <p class="text-yellow-300 font-semibold">Le docteur peut être puni et perdre son travail</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072665/LEGISCTA000006171171/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-teal-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Refuser dans les transports</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand le bus, le train, l'avion refuse de vous prendre</p>
+                        <p class="text-yellow-300 font-semibold">Grosse amende pour la compagnie</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000023086525/LEGISCTA000023069071/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-red-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Refuser de vous vendre quelque chose</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand un magasin refuse de vous servir à cause de votre handicap</p>
+                        <p class="text-yellow-300 font-semibold">Jusqu'à 3 ans de prison et 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000005634379/LEGISCTA000006161283/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-orange-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Violences dans les institutions</p>
+                        <p class="text-gray-300 mb-2 text-lg">Dans les IME, ESAT, foyers, maisons de retraite...</p>
+                        <p class="text-yellow-300 font-semibold">Punitions très fortes + l'endroit peut fermer</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074069/LEGISCTA000006157614/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-purple-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Discrimination en ESAT</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand on vous traite mal dans votre travail en ESAT</p>
+                        <p class="text-yellow-300 font-semibold">Punitions fortes</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000006178217/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-red-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Soins forcés / Stérilisation forcée</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand le docteur vous force à faire quelque chose ou vous opère sans votre accord</p>
+                        <p class="text-yellow-300 font-semibold">Punitions très très fortes + le docteur peut perdre son travail</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006685767/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-yellow-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Tuteur ou curateur qui abuse</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand votre tuteur ou curateur vous fait du mal ou prend votre argent</p>
+                        <p class="text-yellow-300 font-semibold">Prison + perte du poste + doit rembourser</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070721/LEGISCTA000006136540/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-pink-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Ne pas respecter votre vie privée</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand on vous empêche d'avoir une vie amoureuse ou sexuelle</p>
+                        <p class="text-yellow-300 font-semibold">Jusqu'à 1 an de prison et 15 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006797393/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-indigo-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Vous empêcher de vous marier ou d'avoir des enfants</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand on vous dit que vous ne pouvez pas vous marier ou avoir des enfants</p>
+                        <p class="text-yellow-300 font-semibold">C'est interdit par la loi</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070721/LEGISCTA000006136124/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-teal-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Refuser de vous louer un logement</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand un propriétaire refuse de vous louer à cause de votre handicap</p>
+                        <p class="text-yellow-300 font-semibold">Jusqu'à 3 ans de prison et 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000509310/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-orange-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Refuser votre chien guide ou d'assistance</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand un magasin, restaurant refuse votre chien</p>
+                        <p class="text-yellow-300 font-semibold">Jusqu'à 3 ans de prison et 45 000 euros d'amende</p>
+                        <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071367/LEGISCTA000006152303/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+
+                    <div class="border-l-8 border-purple-400 pl-6 py-4">
+                        <p class="font-bold text-xl mb-2">Dire des méchancetés sur les handicapés à la télé ou sur internet</p>
+                        <p class="text-gray-300 mb-2 text-lg">Quand les médias disent des choses méchantes sur les personnes handicapées</p>
+                        <p class="text-yellow-300 font-semibold">Grosses amendes + peuvent être fermés</p>
+                        <a href="https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006068930/" target="_blank" class="text-blue-300 hover:text-blue-200 underline text-sm mt-2 inline-block">Voir la loi</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border-l-8 border-blue-500 p-8 rounded-lg">
+                <h3 class="font-bold text-blue-800 text-2xl mb-6">Comment porter plainte ?</h3>
+                <div class="text-blue-700 text-lg space-y-4">
+                    <p><strong>Porter plainte, ça veut dire aller voir la police pour dire ce qui vous est arrivé.</strong></p>
+                    <p>Vous pouvez :</p>
+                    <ul class="ml-6 space-y-3">
+                        <li><strong>Aller au commissariat ou à la gendarmerie</strong><br>
+                        <span class="text-base">Ils ne peuvent pas refuser de prendre votre plainte</span></li>
+                        <li><strong>Envoyer une lettre au Procureur</strong><br>
+                        <span class="text-base">Le Procureur, c'est la personne qui s'occupe de la justice</span></li>
+                        <li><strong>Porter plainte sur internet</strong><br>
+                        <span class="text-base">Sur le site du gouvernement</span></li>
+                        <li><strong>Vous faire aider par une association</strong><br>
+                        <span class="text-base">Ils peuvent venir avec vous</span></li>
+                    </ul>
+                    <p class="mt-6"><strong>Vous avez le droit d'être accompagné par quelqu'un de confiance.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Section Aide --> <section id="aide" class="section bg-gray-800 border-2 border-yellow-400 rounded-xl shadow-lg p-8 mb-8 hidden" role="main" aria-labelledby="aide-title"> <div class="text-center mb-6"> <button onclick="toggleSectionFALC('aide')" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-bold text-lg focus:outline-none focus:ring-4 focus:ring-blue-300" tabindex="0"> Version Facile a Lire et a Comprendre FALC </button> </div> <h2 id="aide-title" class="text-3xl font-bold text-yellow-300 mb-6">Aide et Ressources</h2> <!-- Version normale --> <div id="aide-normal"> <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-6"> <h3 class="font-bold text-yellow-800 mb-3">Vous n'êtes pas seul·e</h3> <p class="text-yellow-700"> Si vous vivez du validisme, des ressources existent pour vous aider, vous accompagner et défendre vos droits. </p> </div>
+<div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg mb-6"> <h3 class="font-bold text-green-800 text-xl mb-4">Associations de défense des droits</h3> <ul class="text-green-700 space-y-3"> <li> <strong>Collectif Lutte et Handicaps pour l'Égalité et l'Émancipation (CLHEE)</strong><br> <span class="text-sm">Collectif militant antivalidiste</span><br> <a href="https://clhee.org" target="_blank" class="text-green-600 underline">clhee.org</a> </li> <li> <strong>CLE Autistes</strong><br> <span class="text-sm">Coordination d'associations autogérées par et pour les personnes autistes</span><br> <a href="https://cle-autistes.fr" target="_blank" class="text-green-600 underline">cle-autistes.fr</a> </li> <li> <strong>Femmes pour le Dire, Femmes pour Agir (FDFA)</strong><br> <span class="text-sm">01 40 47 06 06</span><br> <span class="text-sm">Association féministe de femmes handicapées</span> </li> <li> <strong>Collectifs locaux et groupes d'entraide</strong><br> <span class="text-sm">Recherchez les collectifs militants antivalidistes dans votre région</span> </li> </ul> </div>
+<div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg mb-6">
+                <h3 class="font-bold text-blue-800 text-xl mb-4">Aide à l'emploi</h3>
+                <ul class="text-blue-700 space-y-3">
+                    <li>
+                        <strong>Défenseur des droits</strong><br>
+                        <span class="text-sm">09 69 39 00 00</span><br>
+                        <span class="text-sm">Lutte contre les discriminations</span><br>
+                        <a href="https://www.defenseurdesdroits.fr" target="_blank" class="text-blue-600 underline">defenseurdesdroits.fr</a>
+                    </li>
+                    <li>
+                        <strong>Cap emploi</strong><br>
+                        <span class="text-sm">Accompagnement vers l'emploi des personnes handicapées</span><br>
+                        <a href="https://www.capemploi.fr" target="_blank" class="text-blue-600 underline">capemploi.fr</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-purple-50 border-l-4 border-purple-400 p-6 rounded-lg mb-6">
+                <h3 class="font-bold text-purple-800 text-xl mb-4">Aide juridique</h3>
+                <ul class="text-purple-700 space-y-3">
+                    <li>
+                        <strong>Maisons de Justice et du Droit</strong><br>
+                        <span class="text-sm">Consultations juridiques gratuites</span>
+                    </li>
+                    <li>
+                        <strong>Aide juridictionnelle</strong><br>
+                        <span class="text-sm">Prise en charge des frais d'avocat selon revenus</span><br>
+                        <a href="https://www.service-public.fr/particuliers/vosdroits/F18074" target="_blank" class="text-purple-600 underline">service-public.fr</a>
+                    </li>
+                    <li>
+                        <strong>Permanences juridiques associatives</strong><br>
+                        <span class="text-sm">Renseignez-vous auprès des associations de défense des droits</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-teal-50 border-l-4 border-teal-400 p-6 rounded-lg">
+                <h3 class="font-bold text-teal-800 text-xl mb-4">Ressources en ligne</h3>
+                <ul class="text-teal-700 space-y-3">
+                    <li>
+                        <strong>Portail de signalement des discriminations</strong><br>
+                        <a href="https://www.antidiscriminations.fr" target="_blank" class="text-teal-600 underline">antidiscriminations.fr</a>
+                    </li>
+                    <li>
+                        <strong>Informations sur vos droits</strong><br>
+                        <a href="https://www.service-public.fr" target="_blank" class="text-teal-600 underline">service-public.fr</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+<!-- Version FALC -->
+        <div id="aide-falc" class="hidden">
+            <div class="bg-yellow-50 border-l-8 border-yellow-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-yellow-800 text-2xl mb-6">Vous n'êtes pas seul</h3>
+                <div class="text-yellow-700 text-lg space-y-4">
+                    <p><strong>Des gens peuvent vous aider.</strong></p>
+                    <p>Il y a des numéros de téléphone et des associations pour vous défendre.</p>
+                </div>
+            </div>
+
+            <div class="bg-red-50 border-l-8 border-red-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-red-800 text-2xl mb-6">Si c'est urgent</h3>
+                <div class="text-red-700 text-lg space-y-4">
+                    <p><strong>Si quelqu'un vous fait du mal maintenant :</strong></p>
+                    <ul class="ml-6 space-y-3">
+                        <li><strong class="text-3xl">17</strong> pour la police</li>
+                        <li><strong class="text-3xl">15</strong> si vous êtes blessé</li>
+                        <li><strong class="text-3xl">114</strong> par SMS si vous êtes sourd</li>
+                        <li><strong class="text-3xl">119</strong> si c'est un enfant en danger</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-pink-50 border-l-8 border-pink-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-pink-800 text-2xl mb-6">Pour parler et avoir des conseils</h3>
+                <div class="text-pink-700 text-lg space-y-4">
+                    <ul class="ml-6 space-y-3">
+                        <li><strong class="text-2xl">3919</strong> - Aide aux femmes qui ont des violences</li>
+                        <li><strong class="text-2xl">116 006</strong> - Aide aux victimes</li>
+                        <li><strong class="text-2xl">01 40 47 06 06</strong> - Aide aux femmes handicapées</li>
+                        <li><strong class="text-2xl">0 800 111 135</strong> - Si on vous maltraite</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-green-50 border-l-8 border-green-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-green-800 text-2xl mb-6">Associations qui défendent vos droits</h3>
+                <div class="text-green-700 text-lg space-y-4">
+                    <div>
+                        <p class="font-bold mb-2">CLHEE</p>
+                        <p class="text-base">Collectif Lutte et Handicaps pour l'Égalité et l'Émancipation</p>
+                        <p class="text-base">Des personnes handicapées qui se battent pour les droits</p>
+                        <p class="text-base"><a href="https://clhee.org" target="_blank" class="text-green-600 underline">Site internet CLHEE</a></p>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-2">CLE Autistes</p>
+                        <p class="text-base">Des personnes autistes qui s'entraident</p>
+                        <p class="text-base"><a href="https://cle-autistes.fr" target="_blank" class="text-green-600 underline">Site internet CLE Autistes</a></p>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-2">Femmes pour le Dire, Femmes pour Agir</p>
+                        <p class="font-bold text-xl">01 40 47 06 06</p>
+                        <p class="text-base">Des femmes handicapées qui défendent les droits des femmes</p>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-2">Collectifs locaux</p>
+                        <p class="text-base">Cherchez les groupes de personnes handicapées qui se battent dans votre région</p>
+                    </div>
+                </div>
+            </div>
+<div class="bg-blue-50 border-l-8 border-blue-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-blue-800 text-2xl mb-6">Pour trouver du travail</h3>
+                <div class="text-blue-700 text-lg space-y-4">
+                    <div>
+                        <p class="font-bold mb-2">Défenseur des droits</p>
+                        <p class="font-bold text-xl">09 69 39 00 00</p>
+                        <p class="text-base">Si on vous discrimine, ils peuvent vous aider</p>
+                        <p class="text-base"><a href="https://www.defenseurdesdroits.fr" target="_blank" class="text-blue-600 underline">Site internet</a></p>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-2">Cap emploi</p>
+                        <p class="text-base">Ils vous aident à trouver du travail</p>
+                        <p class="text-base"><a href="https://www.capemploi.fr" target="_blank" class="text-blue-600 underline">Site internet</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-purple-50 border-l-8 border-purple-500 p-8 rounded-lg mb-8">
+                <h3 class="font-bold text-purple-800 text-2xl mb-6">Pour avoir un avocat</h3>
+                <div class="text-purple-700 text-lg space-y-4">
+                    <div>
+                        <p class="font-bold mb-2">Maisons de Justice</p>
+                        <p class="text-base">Vous pouvez avoir des conseils gratuits</p>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-2">Aide juridictionnelle</p>
+                        <p class="text-base">Si vous n'avez pas beaucoup d'argent, l'État peut payer l'avocat</p>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-2">Les associations</p>
+                        <p class="text-base">Certaines associations ont des avocats qui peuvent vous conseiller gratuitement</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-teal-50 border-l-8 border-teal-500 p-8 rounded-lg">
+                <h3 class="font-bold text-teal-800 text-2xl mb-6">Sites internet utiles</h3>
+                <div class="text-teal-700 text-lg space-y-4">
+                    <div>
+                        <p class="font-bold mb-2">Pour signaler une discrimination</p>
+                        <p class="text-base"><a href="https://www.antidiscriminations.fr" target="_blank" class="text-teal-600 underline">antidiscriminations.fr</a></p>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-2">Pour connaître vos droits</p>
+                        <p class="text-base"><a href="https://www.service-public.fr" target="_blank" class="text-teal-600 underline">service-public.fr</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+// Tout le JavaScript que tu as déjà
+</script>
+
+</body>
+</html>
+
+
+
