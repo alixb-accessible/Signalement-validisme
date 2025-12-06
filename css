@@ -1,0 +1,512 @@
+/* ============================================
+   FOND DRAPEAU DES FIERTÉS HANDICAPÉES
+   ============================================ */
+body {
+    background: linear-gradient(135deg, 
+        #4a4a4a 0%, #4a4a4a 14.28%,      /* Gris foncé */
+        #22c55e 14.28%, #22c55e 28.56%,  /* Vert */
+        #3b82f6 28.56%, #3b82f6 42.84%,  /* Bleu */
+        #ffffff 42.84%, #ffffff 57.12%,  /* Blanc */
+        #fbbf24 57.12%, #fbbf24 71.4%,   /* Jaune */
+        #dc2626 71.4%, #dc2626 85.68%,   /* Rouge */
+        #4a4a4a 85.68%, #4a4a4a 100%     /* Gris foncé */
+    );
+    min-height: 100vh;
+    background-attachment: fixed;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.section {
+    scroll-margin-top: 100px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav-btn {
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-btn:focus {
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5);
+}
+
+/* ============================================
+   ACCESSIBILITÉ - FOCUS
+   ============================================ */
+button:focus, 
+input:focus, 
+select:focus, 
+textarea:focus {
+    outline: 3px solid #fbbf24;
+    outline-offset: 2px;
+}
+
+/* Taille minimale des éléments cliquables (WCAG) */
+button, 
+input[type="radio"], 
+input[type="checkbox"],
+select {
+    min-height: 44px;
+}
+
+/* Les labels doivent aussi être cliquables */
+label {
+    cursor: pointer;
+    display: inline-block;
+}
+
+/* ============================================
+   UPLOAD DE FICHIERS
+   ============================================ */
+.dragover {
+    border-color: #3b82f6 !important;
+    background-color: #dbeafe !important;
+}
+
+.image-preview {
+    max-width: 128px;
+    max-height: 128px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e5e7eb;
+}
+
+.image-preview-container {
+    position: relative;
+}
+
+.image-preview-container .delete-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #dc2626;
+    color: white;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid white;
+    transition: all 0.2s ease;
+}
+
+.image-preview-container .delete-btn:hover {
+    background-color: #991b1b;
+    transform: scale(1.1);
+}
+
+/* ============================================
+   TYPOGRAPHIE ET LISIBILITÉ
+   ============================================ */
+p, li {
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+}
+
+/* ============================================
+   LIENS EXTERNES
+   ============================================ */
+a[target="_blank"]::after {
+    content: " ↗";
+    font-size: 0.8em;
+}
+
+a {
+    transition: color 0.2s ease;
+}
+
+/* ============================================
+   CLASSES UTILITAIRES
+   ============================================ */
+.hidden {
+    display: none !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* ============================================
+   FORMULAIRES
+   ============================================ */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+input[type="file"],
+select,
+textarea {
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Checkboxes et radios personnalisés pour meilleure accessibilité */
+input[type="checkbox"],
+input[type="radio"] {
+    cursor: pointer;
+    accent-color: #3b82f6;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+/* ============================================
+   CARNET - ENTRÉES
+   ============================================ */
+.carnet-entry {
+    background: #374151;
+    border-left: 4px solid #6366f1;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.carnet-entry:hover {
+    background: #4b5563;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.carnet-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 0.5rem;
+}
+
+.carnet-entry-date {
+    font-weight: bold;
+    color: #fbbf24;
+}
+
+.carnet-entry-type {
+    display: inline-block;
+    background: #4f46e5;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.carnet-entry-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.carnet-entry-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+/* ============================================
+   STATISTIQUES
+   ============================================ */
+.stat-box {
+    transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .nav-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .image-preview {
+        max-width: 100px;
+        max-height: 100px;
+    }
+}
+
+@media (max-width: 640px) {
+    h1 {
+        font-size: 1.875rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   IMPRESSION
+   ============================================ */
+@media print {
+    body {
+        background: white;
+    }
+    
+    .nav-btn,
+    header nav,
+    button[onclick*="FALC"],
+    button[onclick*="export"] {
+        display: none;
+    }
+    
+    .section {
+        page-break-inside: avoid;
+        border: 1px solid #000;
+        margin-bottom: 1rem;
+    }
+    
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+}
+
+/* ============================================
+   AMÉLIORATION DES CONTRASTES
+   ============================================ */
+.bg-blue-50 {
+    color: #1e3a8a;
+}
+
+.bg-green-50 {
+    color: #14532d;
+}
+
+.bg-purple-50 {
+    color: #581c87;
+}
+
+.bg-yellow-50 {
+    color: #78350f;
+}
+
+.bg-red-50 {
+    color: #7f1d1d;
+}
+
+.bg-gray-50 {
+    color: #1f2937;
+}
+
+.bg-orange-50 {
+    color: #7c2d12;
+}
+
+.bg-teal-50 {
+    color: #134e4a;
+}
+
+.bg-indigo-50 {
+    color: #312e81;
+}
+
+.bg-pink-50 {
+    color: #831843;
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: wait;
+    position: relative;
+}
+
+.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid #f3f4f6;
+    border-top: 4px solid #3b82f6;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ============================================
+   ALERTES ET NOTIFICATIONS
+   ============================================ */
+.alert {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.alert-success {
+    background-color: #d1fae5;
+    border: 2px solid #10b981;
+    color: #065f46;
+}
+
+.alert-error {
+    background-color: #fee2e2;
+    border: 2px solid #ef4444;
+    color: #7f1d1d;
+}
+
+.alert-warning {
+    background-color: #fef3c7;
+    border: 2px solid #f59e0b;
+    color: #78350f;
+}
+
+.alert-info {
+    background-color: #dbeafe;
+    border: 2px solid #3b82f6;
+    color: #1e3a8a;
+}
+
+/* ============================================
+   AUDIO PLAYER
+   ============================================ */
+audio {
+    width: 100%;
+    margin-top: 0.5rem;
+    filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
+}
+
+audio::-webkit-media-controls-panel {
+    background-color: #374151;
+}
+
+/* ============================================
+   TRANSITIONS GLOBALES
+   ============================================ */
+* {
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+button, a, input, select, textarea {
+    transition: all 0.2s ease;
+}
+
+/* ============================================
+   SCROLLBAR PERSONNALISÉE
+   ============================================ */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* ============================================
+   FOCUS VISIBLE (meilleure accessibilité)
+   ============================================ */
+*:focus-visible {
+    outline: 3px solid #fbbf24;
+    outline-offset: 2px;
+}
+
+/* ============================================
+   AMÉLIORATIONS SPÉCIFIQUES
+   ============================================ */
+.border-l-4, .border-l-8 {
+    border-left-style: solid;
+}
+
+/* Tags/badges pour le carnet */
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.tag-lieu {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.tag-personne {
+    background-color: #fce7f3;
+    color: #9f1239;
+}
+
+.tag-type {
+    background-color: #e0e7ff;
+    color: #3730a3;
+}
+
